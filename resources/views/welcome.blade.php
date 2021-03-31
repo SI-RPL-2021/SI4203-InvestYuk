@@ -48,6 +48,31 @@
 
 <br>
 
+<div class="card-group">
+  <div class="container">
+    <div class="row-grup">
+      <div class="card">
+        <div class="container">
+          <h4><b>Video</b></h4> 
+             
+        </div>
+      </div>
+      &nbsp;
+      <div class="card">
+        <div class="container">
+          <h4><b>Materi</b></h4> 
+           
+        </div>
+      </div>
+      &nbsp;
+      <div class="card">
+        <div class="container">
+          <h4><b>Quiz</b></h4> 
+        
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 </body>

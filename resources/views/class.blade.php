@@ -37,7 +37,7 @@
 <br>
 <div class="card-group">
   <div class="card">
-    <img src="..." class="card-img-top" alt="...">
+    
     <div class="card-body">
       <h5 class="card-title">Artiker / Berita</h5>
       <p class="card-text">isinyaa.........</p>
