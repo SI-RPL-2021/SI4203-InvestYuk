@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
-    <title>Welcome</title>
+    <title>Class Join</title>
 
     <style>
      .container{
@@ -37,7 +37,7 @@
 <br>
 <div class="card-group">
   <div class="card">
-    <img src="..." class="card-img-top" alt="...">
+    <img src="https://www.flaticon.com/svg/vstatic/svg/1995/1995539.svg?token=exp=1617317279~hmac=409e34a81e216e3c123b89e7fb6f5262" class="card-img-top" width="100" height="100">
     <div class="card-body">
       <h5 class="card-title">Info Kelas</h5>
       <p class="card-text">Info kelasnyaaa.................................</p>

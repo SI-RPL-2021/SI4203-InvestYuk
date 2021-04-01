@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
-    <title>Welcome</title>
+    <title>Class</title>
 
     <style>
      .container{
@@ -39,8 +39,8 @@
   <div class="card">
     
     <div class="card-body">
-      <h5 class="card-title">Artiker / Berita</h5>
-      <p class="card-text">isinyaa.........</p>
+      <h5 class="card-title">Artikel / Berita / Highlights</h5>
+      <p class="card-text">isi.</p>
     </div>
   </div>
 </div>
@@ -63,14 +63,14 @@
       <div class="card">
         <div class="container">
           <h4><b>Kelas</b></h4> 
-            <p>Investasi Dunia</p> 
+            <p>Saham</p> 
         </div>
       </div>
       &nbsp;
       <div class="card">
         <div class="container">
           <h4><b>Kelas</b></h4> 
-            <p>Investasi Dunia</p> 
+            <p>Trading</p> 
         </div>
       </div>
     </div>
