@@ -37,7 +37,7 @@
 <br>
 <div class="card-group">
   <div class="card">
-    <img src="https://www.flaticon.com/svg/vstatic/svg/1995/1995539.svg?token=exp=1617317279~hmac=409e34a81e216e3c123b89e7fb6f5262" class="card-img-top" width="100" height="100">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu9sVkeebkZi20aIxjXKbIdUKUjXW27qjfrA&usqp=CAU" class="card-img-top" width="100" height="200">
     <div class="card-body">
       <h5 class="card-title">Info Kelas</h5>
       <p class="card-text">Info kelasnyaaa.................................</p>
@@ -53,21 +53,21 @@
     <div class="row-grup">
       <div class="card">
         <div class="container">
-          <h4><b>Video</b></h4> 
+          <h4><a class="video" href="#">Video</a></h4> 
              
         </div>
       </div>
       &nbsp;
       <div class="card">
         <div class="container">
-          <h4><b>Materi</b></h4> 
+        <h4><a class="materi" href="#">Materi</a></h4>  
            
         </div>
       </div>
       &nbsp;
       <div class="card">
         <div class="container">
-          <h4><b>Quiz</b></h4> 
+        <h4><a class="quiz" href="#">Quiz</a></h4> 
         
         </div>
       </div>

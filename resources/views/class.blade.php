@@ -55,21 +55,21 @@
     <div class="row-grup">
       <div class="card">
         <div class="container">
-          <h4><b>Kelas</b></h4> 
+          <h4><a class="class1" href="#">Kelas</a></h4> 
             <p>Investasi Dunia</p> 
         </div>
       </div>
       &nbsp;
       <div class="card">
         <div class="container">
-          <h4><b>Kelas</b></h4> 
+          <h4><a class="class2" href="#">Kelas</a></h4> 
             <p>Saham</p> 
         </div>
       </div>
       &nbsp;
       <div class="card">
         <div class="container">
-          <h4><b>Kelas</b></h4> 
+          <h4><a class="class3" href="#">Kelas</a></h4> 
             <p>Trading</p> 
         </div>
       </div>
