@@ -4,7 +4,7 @@
 @endcomponent
 @section('content')
 
-<!-- 
+<!--
 
 masukkan desain halaman Anda di sini
 
@@ -90,9 +90,6 @@ border-radius: 15px;
 
 }
 
-
-
-
 </style>
 
 
@@ -124,19 +121,19 @@ border-radius: 15px;
     <div class="row-grup">
       <div class="card2">
         <div class="container">
-          <h4><a class="video" href="#">Video</a></h4> 
+          <h4><a class="video" href="#">Video</a></h4>
         </div>
       </div>
-  
+
       <div class="card3">
         <div class="container">
-            <h4><a class="materi" href="#">Materi</a></h4>  
+            <h4><a class="materi" href="#">Materi</a></h4>
         </div>
       </div>
 
       <div class="card4">
         <div class="container">
-        <h4><a class="quiz" href="#">Quiz</a></h4> 
+        <h4><a class="quiz" href="#">Quiz</a></h4>
         </div>
       </div>
     </div>
