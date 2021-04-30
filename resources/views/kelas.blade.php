@@ -1,5 +1,5 @@
 @extends('layouts.blank')
-@section('title', 'Kelas')
+@section('title', 'kelas')
 @component('components.topbar')
 @endcomponent
 @section('content')
