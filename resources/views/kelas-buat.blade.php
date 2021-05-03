@@ -8,7 +8,7 @@
 <br>
 <div class="container">
 <form>
-  <fieldset disabled>
+  <fieldset enable>
     <legend>FORM KELAS</legend>
     <div class="mb-3">
       <label for="disabledTextInput" class="form-label">Nama Kelas</label>

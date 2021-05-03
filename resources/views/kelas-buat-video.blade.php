@@ -9,7 +9,7 @@
 <div class="container">
 <form>
   <fieldset enable>
-    <legend>FORM MATERI</legend>
+    <legend>FORM VIDEO</legend>
     <div class="mb-3">
         <label for="formGroupExampleInput" class="form-label">Judul Video</label>
         <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
