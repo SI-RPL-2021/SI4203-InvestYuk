@@ -4,18 +4,13 @@
 @endcomponent
 @section('content')
 
-<!-- 
-
-masukkan desain halaman Anda di sini
-
- -->
 <style>
 
 .card-img{
 position: absolute;
 width: 110px;
 height: 107px;
-left: 375px;
+left: 655px;
 top: 281px;
 
 }
@@ -90,35 +85,20 @@ border-radius: 15px;
 
 }
 
-
-
-
 </style>
-
 
 <div class="container">
 <br>
-
-<div class="card10">
-</div>
-
-<div class="card-img">
-    <img src="https://www.flaticon.com/svg/vstatic/svg/2784/2784445.svg?token=exp=1620011583~hmac=08569afecd22a6a471d512ed341e3f48">
-</div>
-
-<div class="card">
-  <div class="card1">
-    <div class="card-body">
-      <h5 class="card-title">Info  Kelas</h5>
-      <p class="card-text">Saham Adalah suatu dokumen berharga yang mampu menampilkan bagian kepemilikan dari suatu perusahaan.</p>
+    <div class="card10">
     </div>
-  </div>
-</div>
-</div>
+
+    <div class="card-img align-self-center mr-3">
+       <img src="https://www.flaticon.com/svg/vstatic/svg/3750/3750019.svg?token=exp=1620011420~hmac=4ae8cbed746a4c99074338955f42eafe">
+    </div>
 
 <br>
 
-<div class="card-group">
+<div class="card-group" >
   <div class="container">
     <div class="row-grup">
       <div class="card2">
