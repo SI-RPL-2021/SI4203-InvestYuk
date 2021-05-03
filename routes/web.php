@@ -44,9 +44,16 @@ use Illuminate\Support\Facades\Route;
 // 
 
 Route::get('/testing', function () {
-    return view('testing');
-})->name("testing");
+    return view('class');
+});
 
+Route::get('/testing1', function () {
+    return view('class-join');
+})->name('class-join');
+
+Route::get('/testing2', function () {
+    return view('kelas-join');
+})->name('kelas-join');
 
 
 
@@ -56,8 +63,8 @@ Route::get('/testing', function () {
 
 // Public Routes
 Route::get('/', function () {
-    return view('home');
-})->name("home");
+    return view('class');
+})->name("class");
 
 Route::get('/login', function () {
     return view('login');
