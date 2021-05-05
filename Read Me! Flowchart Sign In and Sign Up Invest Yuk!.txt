@@ -1,0 +1,7 @@
+Flowchart Masuk ke Website Invest Yuk
+
+belum punya akun
+halaman-utama > register > berhasil-register > login > home
+
+sudah punya akun
+halaman-utama > login > home

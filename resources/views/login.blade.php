@@ -9,15 +9,15 @@
 masukkan desain halaman Anda di sini
 
  -->
-
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
  <style>
 
 
 .card10{
 position: absolute;
-width: 200px;
-height: 375px;
-left: 700px;
+width: 350px;
+height: 400px;
+left: 600px;
 top: 198px;
 
 border: 5px solid #000000;
@@ -40,37 +40,28 @@ img {
 <div class="limiter">
 		<div class="container-login100" style="background-image: url('images/backround3.jpg');">
 			<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+			<div class="col text-center">
 				<form class="login100-form validate-form flex-sb flex-w">
 					<span class="login100-form-title p-b-32">
-						Please Sign In Now!
+						<h3>Masuk ke akun Anda!</h3>
 					</span>
-                    <br><br>
+                    <br>
 
-					<span class="txt1 p-b-11">
-						Username
-					</span>
-					<div class="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
-						<input class="input100" type="text" name="username" >
-						<span class="focus-input100"></span>
+					<form>
+					<div class="form-group">
+						<label for="exampleInputUsername1">Username</label>
+						<input type="username" class="form-control" id="exampleInputUsername1" aria-describedby="usernameHelp" placeholder="Enter username">
+
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">Kata Sandi</label>
+						<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
 					</div>
 					
-					<span class="txt1 p-b-11">
-						Password
-					</span>
-					<div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
-						<span class="btn-show-pass">
-							<i class="fa fa-eye"></i>
-						</span>
-						<input class="input100" type="password" name="pass" >
-						<span class="focus-input100"></span>
-					</div>
-					
-						<br><a href="halaman_utama.php" class="login100-form-btn btn btn-secondary">Sign In Now!</a>
-                        
-                        <h6><br><a class="class2" href="#">Lupa Password?</a></h6>
-                        <br><p>Belum punya akun?</p>
-                        <h5><a class="class2" href="#">Register</a></h5>
-                        
+                        <br><a href="#" class="btn btn-success">Sign In</a> <br><br>
+                        <a href="#" class="btn btn-primary">Belum punya akun? Register!</a>
+						</div>
+
 					</div>
 				</form>
 			</div>

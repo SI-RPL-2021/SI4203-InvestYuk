@@ -9,15 +9,15 @@
 masukkan desain halaman Anda di sini
 
  -->
-
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
  <style>
 
 
 .card10{
 position: absolute;
-width: 200px;
-height: 150px;
-left: 700px;
+width: 400px;
+height: 225px;
+left: 600px;
 top: 198px;
 
 border: 5px solid #000000;
@@ -39,16 +39,15 @@ img {
 <div class="limiter">
 		<div class="container-login100" style="background-image: url('images/backround3.jpg');">
 			<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
-				<form class="login100-form validate-form flex-sb flex-w">
-					<span class="login100-form-title p-b-32">
-						Akun anda sudah berhasil dibuat!
-                        Klik tombol Sign In dibawah ini
+			<div class="col text-center">
+					<h4>Akun anda sudah berhasil dibuat!
+                        Klik tombol Sign In dibawah ini</h4>
 					</span>
                     <br><br>
 			
-						<a href="halaman_utama.php" class="login100-form-btn btn btn-secondary">Sign In Now!</a>
+					<a href="#" class="btn btn-success">Sign In</a>
                                                       
-
+					</div>
 					</div>
 				</form>
 			</div>
