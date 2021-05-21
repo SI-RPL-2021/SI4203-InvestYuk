@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,17 +66,12 @@ Route::get('/testing2', function () {
 Route::get('/', function () {
     return view('home');
 });
-
-Route::get('/login', function () {
-    return view('login');
-})->name("login");
-
-Route::get('/register', function () {
-    return view('register');
-})->name("register");
-
   
-Route::post('/auth/register', [AuthController::class, 'register'])->name('auth.register');
-Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');
-Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
+Route::get('/register', [AuthController::class, 'registerCreate'])->name('register.create');
+Route::get('/login', [AuthController::class, 'loginCreate'])->name('login.create');
+
+Route::post('/register', [AuthController::class, 'register'])->name('register.store');
+Route::post('/login', [AuthController::class, 'login'])->name('login.store');
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 

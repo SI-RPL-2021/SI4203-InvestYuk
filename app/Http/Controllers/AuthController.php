@@ -9,46 +9,70 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+    public function loginCreate()
+    {
+        return view('login');
+    }
+
+    public function registerCreate()
+    {
+        return view('register');
+    }
+    
     public function login(Request $request)
     {
-        if(Auth::attempt($request)){
-            // tambahkan session
+        $credentials = $request->only('email', 'password');
 
-            return redirect(route('home'));
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('home');
         }
-        
+
         return back()->withErrors([
-            'email' => 'The email or password is wrong.'
+            'email' => 'The provided credentials do not match our records. dadadadad',
         ]);
     }
     function register(Request $request)
     {
-        if (!User::find(1)) {
-            $request['role'] = 'Admin';
-            // buat hidden form?
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|confirmed|min:8',
+        ]);
+
+        $credentials = $request->only('name', 'email', 'password');
+
+        $countForAdmin = User::count();
+        if ($countForAdmin === 0) {
+            $credentials['role'] = 'Admin';
+            User::unguard();
         }
-        if (User::where('email', $request['email'])->exists()) {
+        
+        if (User::where('email', $credentials['email'])->exists()) {
             return back()->withErrors([
                 'email' => 'The email is already taken.'
             ]);
         }
 
-        $user = User::create(request());
-        Auth::attempt($user);
-        // bisa work auth() ?
+        $user = User::create([
+            'name' => $credentials['name'],
+            'email' => $credentials['email'],
+            'password' => Hash::make($credentials['password']),
+            'role' => isset($credentials['role']) ? $credentials['role'] : '',
+        ]);
+        User::reguard();
 
-        return redirect(route('home'));
+        return redirect(route('login.create')); 
     }
     function logout(Request $req)
     {
-        // insert auth algorithm 
-
+        Auth::logout();
+    
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+    
         return redirect(route('home'));
     }    
-
-    // masukin validator
-    // https://github.com/bradtraversy/lsapp/blob/master/app/Http/Controllers/Auth/RegisterController.php
-    // https://laravel.com/docs/8.x/validation#manually-creating-validators
-    // https://laravel.com/docs/8.x/validation#quick-defining-the-routes --> step by step
-    // buat func baru terus sambungin ke register (route ngarah ke validator)
 }
