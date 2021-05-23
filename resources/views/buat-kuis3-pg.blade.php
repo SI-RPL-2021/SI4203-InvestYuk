@@ -44,35 +44,35 @@ border-radius: 12px;
 
   <h5>Silakan Masukkan Jawaban</h5>
   <div class="form-check">
-  <input class="form-check-input" type="checkbox" id="defaultCheck1" value="" >
-  <label class="form-check-label" for="defaultCheck1">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+  <label class="form-check-label" for="exampleRadios1">
     Pilihan A
   </label>
   <input class="form-control" type="text" placeholder="Masukkan Disini">
 </div>
 <div class="form-check">
-  <input class="form-check-input" type="checkbox" id="defaultCheck2" value="">
-  <label class="form-check-label" for="defaultCheck2">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+  <label class="form-check-label" for="exampleRadios2">
     Pilihan B
   </label>
   <input class="form-control" type="text" placeholder="Masukkan Disini">
   </div>
   <div class="form-check">
-  <input class="form-check-input" type="checkbox" id="defaultCheck3" value="">
-  <label class="form-check-label" for="defaultCheck3">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
+  <label class="form-check-label" for="exampleRadios3">
     Pilihan C
   </label>
   <input class="form-control" type="text" placeholder="Masukkan Disini">
 </div>
 <div class="form-check">
-  <input class="form-check-input" type="checkbox" id="defaultCheck4" value="">
-  <label class="form-check-label" for="defaultCheck4">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="option4">
+  <label class="form-check-label" for="exampleRadios4">
     Pilihan D
   </label>
   <input class="form-control" type="text" placeholder="Masukkan Disini">
     </div>
     <div class="col text-center">
-    <br><a href="#" class="btn btn-dark">Pilihan "#" Sebagai jawaban yang benar</a><br>
+    <br><p>Pilih salah satu sebagai petunjuk jawaban yang benar</p>
     <br><a href="#" class="btn btn-primary">Selanjutnya, Untuk Input Soal Berikutnya</a>
     <a href="#" class="btn btn-success">Simpan, Jika Sudah Selesai</a>
   </div>
