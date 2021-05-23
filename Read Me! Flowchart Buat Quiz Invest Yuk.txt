@@ -1,0 +1,7 @@
+Alur Halaman Buat Quiz
+
+Jika PG
+Buat kuis > buat kuis 2 > buat quiz 3 pg > buat kuis berhasil
+
+Jika Essay
+Buat kuis > buat kuis 2 > buat quiz 3 essay > buat kuis berhasil
