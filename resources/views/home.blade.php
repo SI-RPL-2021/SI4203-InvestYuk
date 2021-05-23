@@ -1,16 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.blank')
 @section('title', 'Home')
 @component('components.topbar')
 @endcomponent
 @section('content')
 
-<!-- tampilan utama saat memasuki website
-        (boleh diakses tanpa login)
-
-
- -->
-
-<h1>Ini home</h1>
-
+<h4>Ini home</h4>
+<br>
+<br>
 
 @endsection

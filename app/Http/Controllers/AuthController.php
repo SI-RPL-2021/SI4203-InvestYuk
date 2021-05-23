@@ -9,6 +9,11 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+    public function dashboard()
+    {
+        return view('dashboard');
+    }
+
     public function loginCreate()
     {
         return view('login');
@@ -22,11 +27,11 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-
+        
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('home');
+            return redirect()->intended('/');
         }
 
         return back()->withErrors([
