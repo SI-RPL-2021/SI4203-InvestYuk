@@ -49,12 +49,12 @@ img {
 					<form>
 					<div class="form-group">
 						<label for="exampleInputUsername1">Username</label>
-						<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+						<input type="username" class="form-control" id="exampleInputUsername1" aria-describedby="usernameHelp" placeholder="Masukkan Username">
 
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">Kata Sandi</label>
-						<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+						<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Masukkan Kata Sandi">
 					</div>
 					
                         <a href="#" class="btn btn-primary">Sign Up</a>
