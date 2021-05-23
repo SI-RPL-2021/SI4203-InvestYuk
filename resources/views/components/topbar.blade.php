@@ -1,14 +1,12 @@
 <!-- TO DO: complete our navbar and headbar -->
 
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href= "/">
-                    <h7 class="" style="font-weight: bold;">Invest Yuk!</h7></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<nav class="navbar navbar-dark bg-dark">
+		<div class="container">
+			<ul class="nav justify-content-align">
+		  		<a class="navbar-brand" href="#">
+				<img src="https://cdn.icon-icons.com/icons2/1312/PNG/512/01-8_86385.png" alt="" width="30" height="30" class="d-inline-block align-top">
+				Invest Yuk!
+		  		</a>
+			</ul>
+		</div>
+	  </nav>

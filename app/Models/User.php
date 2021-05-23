@@ -29,7 +29,17 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'role',
         'remember_token',
+    ];
+
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [
+        'role',
     ];
 
     /**

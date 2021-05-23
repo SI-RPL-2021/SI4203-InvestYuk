@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\KelasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,38 +46,44 @@ use Illuminate\Support\Facades\Route;
 // 
 
 Route::get('/testing', function () {
-    return view('class');
+    return view('Class/class');
 });
 
 Route::get('/testing1', function () {
-    return view('class-join');
+    return view('Class/class-join');
 })->name('class-join');
 
 Route::get('/testing2', function () {
-    return view('kelas-join');
+    return view('Class/kelas-join');
 })->name('kelas-join');
 
 
 
 // Authenticated Routes
 
+Route::get('/', [KelasController::class, 'index'])->name('home');
+Route::get('/kelas/{$id}', [KelasController::class, 'show'])->middleware('auth')->name('kelas.show');
+Route::get('/kelas/{$id}/topic', [KelasController::class, 'showTopic'])->middleware('auth')->name('kelas.show.topic');
+Route::get('/kelas/{$id}/video', [KelasController::class, 'showVideo'])->middleware('auth')->name('kelas.show.video');
+Route::get('/kelas/{$id}/kuis', [KelasController::class, 'showKuis'])->middleware('auth')->name('kelas.show.kuis');
+
+Route::get('/kelas-buat', [KelasController::class, 'create'])->middleware('auth')->name('kelas.create');
+Route::post('/kelas-buat', [KelasController::class, 'store'])->middleware('auth')->name('kelas.store');
+
+Route::get('/kelas-buat/{$id}', [KelasController::class, 'createTopic'])->middleware('auth')->name('kelas.create.topic');
+Route::get('/kelas-buat/{$id}', [KelasController::class, 'createVideo'])->middleware('auth')->name('kelas.create.video');
+Route::get('/kelas-buat/{$id}', [KelasController::class, 'createKuis'])->middleware('auth')->name('kelas.create.kuis');
+Route::post('/kelas-buat/{$id}', [KelasController::class, 'storeFile'])->middleware('auth')->name('kelas.store.file');
 
 
 // Public Routes
-Route::get('/', function () {
-    return view('class');
-})->name("class");
-
-Route::get('/login', function () {
-    return view('login');
-})->name("login");
-
-Route::get('/register', function () {
-    return view('register');
-})->name("register");
-
+Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
   
-Route::post('/auth/register', [AuthController::class, 'register'])->name('auth.register');
-Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');
-Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
+Route::get('/register', [AuthController::class, 'registerCreate'])->name('register.create');
+Route::get('/login', [AuthController::class, 'loginCreate'])->name('login.create');
+
+Route::post('/register', [AuthController::class, 'register'])->name('register.store');
+Route::post('/login', [AuthController::class, 'login'])->name('login.store');
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
