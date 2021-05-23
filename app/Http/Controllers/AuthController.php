@@ -14,6 +14,11 @@ class AuthController extends Controller
         return view('dashboard');
     }
 
+    public function authCreate()
+    {
+        return view('halaman-utama');
+    }
+
     public function loginCreate()
     {
         return view('login');
@@ -22,6 +27,11 @@ class AuthController extends Controller
     public function registerCreate()
     {
         return view('register');
+    }
+
+    public function successCreate()
+    {
+        return view('berhasil-register');
     }
     
     public function login(Request $request)

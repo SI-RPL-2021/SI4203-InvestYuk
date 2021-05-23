@@ -104,7 +104,7 @@ img {
       <div class="card3">
         <div class="container">
         <div class="col text-center">
-        <a href="{{ route('duaraara') }}" class="btn btn-primary">Sign Up</a>
+        <a href="{{ route('register.create') }}" class="btn btn-primary">Sign Up</a>
             <h6>Jika belum memiliki akun</h6>
             </div> 
         </div>

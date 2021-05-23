@@ -46,7 +46,7 @@ use App\Http\Controllers\KelasController;
 // 
 
 Route::get('/testing', function () {
-    return view('Class/class');
+    return view('halaman-utama');
 });
 
 Route::get('/testing1', function () {
@@ -78,9 +78,11 @@ Route::post('/kelas-buat/{$id}', [KelasController::class, 'storeFile'])->middlew
 
 // Public Routes
 Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
-  
+
+Route::get('/auth', [AuthController::class, 'authCreate'])->name('auth');  
 Route::get('/register', [AuthController::class, 'registerCreate'])->name('register.create');
 Route::get('/login', [AuthController::class, 'loginCreate'])->name('login.create');
+Route::get('/success', [AuthController::class, 'successCreate'])->name('success.create');
 
 Route::post('/register', [AuthController::class, 'register'])->name('register.store');
 Route::post('/login', [AuthController::class, 'login'])->name('login.store');

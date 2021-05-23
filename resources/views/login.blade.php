@@ -62,7 +62,7 @@ img {
 							<input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Kata Sandi">
 						</div>
 							<br><button class="btn btn-success"> Sign In </button> <br><br>
-							<button href="{{ route('duaraara') }}" class="btn btn-primary"> Belum punya akun? Register! </button>
+							<button href="{{ route('register.create') }}" class="btn btn-primary"> Belum punya akun? Register! </button>
 						</div>
 
 					
