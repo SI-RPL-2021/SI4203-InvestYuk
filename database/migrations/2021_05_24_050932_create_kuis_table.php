@@ -32,6 +32,6 @@ class CreateKuisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jenis_kuis');
+        Schema::dropIfExists('kuis');
     }
 }

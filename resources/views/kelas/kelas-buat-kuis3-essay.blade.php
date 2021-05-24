@@ -40,11 +40,10 @@ border-radius: 12px;
   <div class="card-body"><br>
     <div class="col text-center">
       <h5>Tipe Soal : Essay</h5><br>
-      </div>
-      <form method="post" action="{{ route('kelas.store.file') }}">
+      <form method="post" action="{{ route('kelas.store.file') }}" enctype='multipart/form-data'>
       @csrf
         <h5>Silakan Masukkan Soal</h5>
-        {{ Form::hidden('jenis_kuis', 'essay') }}
+          <input type="hidden" value="essay" name="jenis_kuis">
           <div class="form-group">
             <label for="soal_kuis">Soal</label>
             <textarea class="form-control" id="soal_kuis" name="soal_kuis" placeholder="Masukkan Disini" rows="3"></textarea>

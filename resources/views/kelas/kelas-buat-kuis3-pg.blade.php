@@ -40,18 +40,18 @@ border-radius: 12px;
   <div class="card-body"><br>
     <div class="col text-center">
       <h5>Tipe Soal : Pilihan Ganda</h5><br>
-      <form method="post" action="{{ route('kelas.store.file') }}">
+      <form method="post" action="{{ route('kelas.store.file') }}" enctype='multipart/form-data'>
       @csrf
-      {{ Form::hidden('jenis_kuis', 'pilgan') }}
         <h5>Silakan Masukkan Soal</h5>
+        <input type="hidden" value="pilgan" name="jenis_kuis">
         <div class="form-group">
-          <label for="exampleFormControlTextarea1">No 1</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Masukkan Disini" rows="3"></textarea>
+          <label for="soal_kuis">No 1</label>
+          <textarea class="form-control" id="soal_kuis" name="soal_kuis" placeholder="Masukkan Disini" rows="3"></textarea>
         </div>
 
         <h5>Silakan Masukkan Jawaban</h5>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="jawaban_kuis" id="jawaban_kuis" value="jawaban_kuis">
+          <input class="form-check-input" type="radio" name="jawaban_kuis" id="jawaban_kuis" value="option1">
           <label class="form-check-label" for="jawaban_kuis">
             Pilihan A
           </label>
@@ -59,7 +59,7 @@ border-radius: 12px;
         </div>
 
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="jawaban_kuis" id="jawaban_kuis" value="jawaban_kuis">
+          <input class="form-check-input" type="radio" name="jawaban_kuis" id="jawaban_kuis" value="option2">
           <label class="form-check-label" for="jawaban_kuis">
             Pilihan B
           </label>
@@ -67,7 +67,7 @@ border-radius: 12px;
         </div>
 
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="jawaban_kuis" id="jawaban_kuis" value="jawaban_kuis">
+          <input class="form-check-input" type="radio" name="jawaban_kuis" id="jawaban_kuis" value="option3">
           <label class="form-check-label" for="jawaban_kuis">
             Pilihan C
           </label>
@@ -75,7 +75,7 @@ border-radius: 12px;
         </div>
 
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="jawaban_kuis" id="jawaban_kuis" value="jawaban_kuis">
+          <input class="form-check-input" type="radio" name="jawaban_kuis" id="jawaban_kuis" value="option4">
           <label class="form-check-label" for="jawaban_kuis">
             Pilihan D
           </label>

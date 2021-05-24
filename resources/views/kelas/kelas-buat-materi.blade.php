@@ -15,7 +15,7 @@
 @endforeach
 
 
-<form method="post" action="{{ route('kelas.store.file') }}">
+<form method="post" action="{{ route('kelas.store.file') }}" enctype='multipart/form-data'>
 @csrf
   <fieldset enable>
     <legend>FORM MATERI</legend>

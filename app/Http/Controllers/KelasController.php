@@ -208,7 +208,7 @@ class KelasController extends Controller
                 ]);
         }
 
-        return view('kelas/kelas-buat-kuis-essay');
+        return view('kelas/kelas-buat-kuis3-essay');
     }
 
     /**
@@ -259,9 +259,9 @@ class KelasController extends Controller
     public function storeJenisKuis(Request $request)
     {
         if($request->jenisKuis == 'option1'){
-            return route('kelas.create.pilgan.kuis');
+            return redirect(route('kelas.create.pilgan.kuis'));
         }else{
-            return route('kelas.create.essay.kuis');
+            return redirect(route('kelas.create.essay.kuis'));
         }
     }
     public function storeFile(Request $request)
@@ -270,54 +270,63 @@ class KelasController extends Controller
         // pas masuk ke halaman video Kuis materi, perlu kirim id juga
         // perlu di route juga dispesifikin, cek route untuk view
         // karena konsepnya mirip sama kirim id post bagian view
+        
+        // dd($request->file_topic->getMimeType());
+        // dd($request);
 
-        if($request->file_topic){
-            $this->validate($request, [
-                'name_topic' => 'required|string|max:255',
-                'file_topic' => 'required|mimes:csv,txt,xlx,xls,pdf|max:1999'
-            ]);
-        }
-        if($request->file_video){
-            $this->validate($request, [
-                'name_video' => 'required|string|max:255',
-                'file_topic' => 'required|mimes:video/x-ms-asf,video/x-flv,video/mp4,
-                application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,
-                video/x-ms-wmv,video/avi,video/gif|max:1999'
-            ]);
-        }
-        if($request->jenis_kuis == 'pilgan'){
-            $this->validate($request, [
-                'jenis_kuis' => 'required|string|max:255',
-                'soal_kuis' => 'required|string|max:255',
-                'jawaban_kuis' => 'required|string|max:255',
-                'option1' => 'required|string|max:255',
-                'option2' => 'required|string|max:255',
-                'option3' => 'required|string|max:255',
-                'option4' => 'required|string|max:255',
-            ]);
-        }
-        if($request->jenis_kuis == 'essay'){
-            $this->validate($request, [
-                'jenis_kuis' => 'required|string|max:255',
-                'soal_kuis' => 'required|string|max:255',
-                'jawaban_kuis' => 'required|string|max:255',
-            ]);
-        }
+        // if($request->file_topic){
+        //     $this->validate($request, [
+        //         'name_topic' => 'required|string|max:255',
+        //         'file_topic' => 'required|mimes:application/pdf,text/plain,text/txt,text/csv,text/xlx,text/xls,text/pdf|max:1999'
+        //     ]);
+        // }
+        // if($request->file_video){
+        //     $this->validate($request, [
+        //         'name_video' => 'required|string|max:255',
+        //         'file_video' => 'required|mimes:text/plain,application/pdf,image/gif,video/x-ms-asf,video/x-flv,video/mp4,
+        //         application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,
+        //         video/x-ms-wmv,video/avi,image,gif|max:1999'
+        //     ]);
+        // }
+        // if($request->jenis_kuis == 'pilgan'){
+        //     $this->validate($request, [
+        //         'jenis_kuis' => 'required|string|max:255',
+        //         'soal_kuis' => 'required|string|max:255',
+        //         'jawaban_kuis' => 'required|string|max:255',
+        //         'option1' => 'required|string|max:255',
+        //         'option2' => 'required|string|max:255',
+        //         'option3' => 'required|string|max:255',
+        //         'option4' => 'required|string|max:255',
+        //     ]);
+        // }
+        // if($request->jenis_kuis == 'essay'){
+        //     $this->validate($request, [
+        //         'jenis_kuis' => 'required|string|max:255',
+        //         'soal_kuis' => 'required|string|max:255',
+        //         'jawaban_kuis' => 'required|string|max:255',
+        //     ]);
+        // }
 
-        $kelass = Kelas::where('teacher_id', auth()->user()->id)->latest()->first();
+        $kelas = Kelas::where('teacher_id', auth()->user()->id)->latest()->first();
 
         // Handle File Upload
-        if($request->hasFile('file_topic')){
+        if($request->hasFile('file_topic') or $request->hasFile('file_video')){
+            $file_to_save = 'file_topic';
+            if($request->file_topic == null){
+                $file_to_save = 'file_video';
+            }
+
+            // dd($request->file_topic);
             // Get filename with the extension
-            $filenameWithExt = $request->file('file_topic')->getClientOriginalName();
+            $filenameWithExt = $request->file($file_to_save)->getClientOriginalName();
             // Get just filename
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             // Get just ext
-            $extension = $request->file('file_topic')->getClientOriginalExtension();
+            $extension = $request->file($file_to_save)->getClientOriginalExtension();
             // Filename to store
             $fileNameToStore = $filename.'_'.time().'.'.$extension;
             // Upload Image
-            $path = $request->file('file_topic')->storeAs('public/file_kelass', $fileNameToStore);
+            $path = $request->file($file_to_save)->storeAs('public/file_kelass', $fileNameToStore);
 
             // cara munculin, img style="width:100%" src="/storage/cover_images/{{$post->file_topic}}"
             // perlu disamping method post di view, 'enctype' => 'multipart/form-data'
@@ -326,102 +335,114 @@ class KelasController extends Controller
             $fileNameToStore = '';
         }
 
+        // dd(Kuis::where('name_kuis', $kelas->id.'_'.auth()->user()->id.'_'.$request->jenis_kuis)->first());
+        
         // Add something to existing Kelas
         if($request->file_topic){
-            $kelas->name_topic = $request->input('name_topic');
+            $kelas->name_topic = $request['name_topic'];
             $kelas->file_topic = $fileNameToStore;
             $kelas->save();
         }
         if($request->file_video){
-            $kelas->name_video = $request->input('name_video');
+            $kelas->name_video = $request['name_video'];
             $kelas->file_video = $fileNameToStore;
             $kelas->save();
         }
-        if(!!Kuis::where('name_kuis', $kelass->id.'_'.auth()->user()->id.'_'.$request->jenis_kuis)->first()){
-            $name_kuis = $kelass->id.'_'.auth()->user()->id.'_'.$request->jenis_kuis;
+        if(Kuis::where('name_kuis', $kelas->id.'_'.auth()->user()->id.'_'.$request->jenis_kuis)->first() == null){
+            $name_kuis = $kelas->id.'_'.auth()->user()->id.'_'.$request->jenis_kuis;
             $i = '1';
-
+            
             $kuis = new Kuis;
-            $kuis->kelas_id = $kelass->id;
+            $kuis->kelas_id = $kelas->id;
             $kuis->teacher_id = auth()->user()->id;
             $kuis->name_kuis = $name_kuis;
             $kuis->jenis_kuis = $request->jenis_kuis;
             $kuis->count_kuis = $i;
 
             if($request->jenis_kuis == 'pilgan'){
-                $kuisFile = fopen("public/file_kelass/".$name_kuis, "w");
+                $kuisFile = fopen($_SERVER['DOCUMENT_ROOT']."\\storage\\file_kelass\\".$name_kuis.".txt", "w");
 
-                $arr['1']['soal'] = $request->soal_kuis.'\n';
-                $arr['1']['jawaban']['a'] = $request->option1.'\n';
-                $arr['1']['jawaban']['b'] = $request->option2.'\n';
-                $arr['1']['jawaban']['c'] = $request->option3.'\n';
-                $arr['1']['jawaban']['d'] = $request->option4.'\n';
-                $arr['1']['benar'] = $request->jawaban.'\n';
+                $longString = 
+                $i."$%^"
+                .$request->soal_kuis."$%^"
+                .$request->option1."$%^"
+                .$request->option2."$%^"
+                .$request->option3."$%^"
+                .$request->option4."$%^"
+                .$request->jawaban_kuis."$%^"
+                ;
 
-                fwrite($kuisFile, $arr);
+                fwrite($kuisFile, $longString);
                 fclose($kuisFile);
+                
+                $kuis->file_kuis = $kuisFile;
                 $kuis->save();
             }
             if($request->jenis_kuis == 'essay'){
-                $kuisFile = fopen("public/file_kelass/".$name_kuis, "w");
+                $kuisFile = fopen($_SERVER['DOCUMENT_ROOT']."\\storage\\file_kelass\\".$name_kuis.".txt", "w");
 
-                $arr['1']['soal'] = $request->soal_kuis.'\n';
-                $arr['1']['benar'] = $request->jawaban.'\n';
+                $longString = 
+                $i."$%^"
+                .$request->soal_kuis."$%^"
+                .$request->jawaban_kuis."$%^"
+                ;
                 
-                fwrite($kuisFile, $txt);
+                fwrite($kuisFile, $longString);
                 fclose($kuisFile);
                 $kuis->save();
             }
         }else {
-            $kuis = Kuis::where('name_kuis', $kelass->id.'_'.auth()->user()->id.'_'.$request->jenis_kuis)->first();
-            $i = $kuis->count_kuis;
+            $kuis = Kuis::where('name_kuis', $kelas->id.'_'.auth()->user()->id.'_'.$request->jenis_kuis)->first();
+            $i = $kuis['count_kuis'];
+            $i += 1;
 
             if($request->jenis_kuis == 'pilgan'){
-                $kuisFile = fopen("public/file_kelass/".$request->name_kuis, "w");
-                $tempKuis = new SplFileObject($kuisFile);
+                $pathFile = $_SERVER['DOCUMENT_ROOT']."\\storage\\file_kelass\\".$kuis->name_kuis.".txt";
+                $testFile = fopen($pathFile, "r");
+                
+                $fileReaded = fread($testFile, filesize($pathFile));
+                $longString = 
+                $i."$%^"
+                .$request->soal_kuis."$%^"
+                .$request->option1."$%^"
+                .$request->option2."$%^"
+                .$request->option3."$%^"
+                .$request->option4."$%^"
+                .$request->jawaban_kuis."$%^"
+                ;
+                
+                $combineString = $fileReaded.$longString;
 
-                while (range($i)) {
-                    $arr[$i]['soal'] = $myFile->fgets() . PHP_EOL;
-                    $arr[$i]['jawaban']['a'] = $myFile->fgets() . PHP_EOL;
-                    $arr[$i]['jawaban']['b'] = $myFile->fgets() . PHP_EOL;
-                    $arr[$i]['jawaban']['c'] = $myFile->fgets() . PHP_EOL;
-                    $arr[$i]['jawaban']['d'] = $myFile->fgets() . PHP_EOL;
-                    $arr[$i]['benar'] = $myFile->fgets() . PHP_EOL;
-                }
-
-                $i += 1;
-                $arr[$i]['soal'] = $request->soal_kuis.'\n';
-                $arr[$i]['jawaban']['a'] = $request->option1.'\n';
-                $arr[$i]['jawaban']['b'] = $request->option2.'\n';
-                $arr[$i]['jawaban']['c'] = $request->option3.'\n';
-                $arr[$i]['jawaban']['d'] = $request->option4.'\n';
-                $arr[$i]['benar'] = $request->jawaban.'\n';
-
-                fwrite($kuisFile, $arr);
+                fclose($testFile);
+                $kuisFile = fopen($_SERVER['DOCUMENT_ROOT']."\\storage\\file_kelass\\".$kuis->name_kuis.".txt", "w");
+                
+                fwrite($kuisFile, $combineString);
                 fclose($kuisFile);
                 $kuis->save();
             }
             if($request->jenis_kuis == 'essay'){
-                $kuisFile = fopen("public/file_kelass/".$request->name_kuis, "w");
-                $tempKuis = new SplFileObject($kuisFile);
-
-                while (range($i)) {
-                    $arr[$i]['soal'] = $myFile->fgets() . PHP_EOL;
-                    $arr[$i]['benar'] = $myFile->fgets() . PHP_EOL;
-                }
-
-                $i += 1;
-
-                $arr[$i]['soal'] = $request->soal_kuis.'\n';
-                $arr[$i]['benar'] = $request->jawaban.'\n';
+                $pathFile = $_SERVER['DOCUMENT_ROOT']."\\storage\\file_kelass\\".$kuis->name_kuis.".txt";
+                $testFile = fopen($pathFile, "r");
                 
-                fwrite($kuisFile, $txt);
+                $fileReaded = fread($testFile, filesize($pathFile));
+                $longString = 
+                $i."$%^"
+                .$request->soal_kuis."$%^"
+                .$request->jawaban_kuis."$%^"
+                ;
+                
+                $combineString = $fileReaded.$longString;
+
+                fclose($testFile);
+                $kuisFile = fopen($_SERVER['DOCUMENT_ROOT']."\\storage\\file_kelass\\".$name_kuis.".txt", "w");
+                
+                fwrite($kuisFile, $combineString);
                 fclose($kuisFile);
                 $kuis->save();
             }
         }
 
-        return redirect()->with('success', 'Kelas Updated');
+        return redirect()->back()->with('success', 'Kelas Updated');
     }
 
 
