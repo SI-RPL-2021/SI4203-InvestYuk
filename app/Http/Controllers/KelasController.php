@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Kelas;
+use App\Models\Kuis;
 use App\Models\User;
 
 class KelasController extends Controller
@@ -108,7 +109,18 @@ class KelasController extends Controller
                 ]);
         }
 
+        // dd(Kelas::count());
+
+        // if(Kelas::count() !== 0){
+        //     $kelass = Kelas::where('teacher_id', auth()->user()->id)->first();
+        //     // echo $kelass;
+        //     // echo '<br>'.$kelass->id;
+        // }else {
+        //     $kelass['id'] = '#';
+        // }
+
         return view('kelas/kelas-buat');
+        //, ['klass' => $kelass, 'users' => auth()->user()->id]);
     }
 
     /**
@@ -116,7 +128,7 @@ class KelasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createTopic($id)
+    public function createTopic()
     {
         // Check for correct role
         if(auth()->user()->role == 'Student'){
@@ -124,6 +136,9 @@ class KelasController extends Controller
                 'role' => 'The provided credentials do not match our records. biirrrara',
                 ]);
         }
+        
+        // $kelass = Kelas::where('teacher_id', auth()->user()->id)->latest()->first();
+        // dd($kelass);
 
         return view('kelas/kelas-buat-materi');
     }
@@ -133,7 +148,7 @@ class KelasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createVideo($id)
+    public function createVideo()
     {
         // Check for correct role
         if(auth()->user()->role == 'Student'){
@@ -150,7 +165,7 @@ class KelasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createKuis($id)
+    public function createKuis()
     {
         // Check for correct role
         if(auth()->user()->role == 'Student'){
@@ -161,6 +176,63 @@ class KelasController extends Controller
 
         return view('kelas/kelas-buat-kuis');
     }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createJenisKuis()
+    {
+        // Check for correct role
+        if(auth()->user()->role == 'Student'){
+            return redirect('/')->withErrors([
+                'role' => 'The provided credentials do not match our records. biirrrara',
+                ]);
+        }
+
+        return view('kelas/kelas-buat-kuis2');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createEssayKuis()
+    {
+        // Check for correct role
+        if(auth()->user()->role == 'Student'){
+            return redirect('/')->withErrors([
+                'role' => 'The provided credentials do not match our records. biirrrara',
+                ]);
+        }
+
+        return view('kelas/kelas-buat-kuis-essay');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createPilganKuis()
+    {
+        // Check for correct role
+        if(auth()->user()->role == 'Student'){
+            return redirect('/')->withErrors([
+                'role' => 'The provided credentials do not match our records. biirrrara',
+                ]);
+        }
+
+        return view('kelas/kelas-buat-kuis3-pg');
+    }
+
+
+
+
+
+    
 
     /**
      * Store a newly created resource in storage.
@@ -182,9 +254,17 @@ class KelasController extends Controller
         $kelas->teacher_id = auth()->user()->id;
         $kelas->save();
 
-        return redirect()->with('success', 'Kelas Created');
+        return redirect()->back()->with('kelass', $kelas)->with('success', 'Kelas Created');
     }
-    public function storeFile(Request $request, $id)
+    public function storeJenisKuis(Request $request)
+    {
+        if($request->jenisKuis == 'option1'){
+            return route('kelas.create.pilgan.kuis');
+        }else{
+            return route('kelas.create.essay.kuis');
+        }
+    }
+    public function storeFile(Request $request)
     {
         // video, Kuis jadi satu karena mereka aja yang terpisah dan optional
         // pas masuk ke halaman video Kuis materi, perlu kirim id juga
@@ -205,14 +285,26 @@ class KelasController extends Controller
                 video/x-ms-wmv,video/avi,video/gif|max:1999'
             ]);
         }
-        if($request->file_kuis){
+        if($request->jenis_kuis == 'pilgan'){
             $this->validate($request, [
-                'name_kuis' => 'required|string|max:255',
-                'file_topic' => 'required|mimes:csv,txt,xlx,xls,pdf|max:1999'
+                'jenis_kuis' => 'required|string|max:255',
+                'soal_kuis' => 'required|string|max:255',
+                'jawaban_kuis' => 'required|string|max:255',
+                'option1' => 'required|string|max:255',
+                'option2' => 'required|string|max:255',
+                'option3' => 'required|string|max:255',
+                'option4' => 'required|string|max:255',
+            ]);
+        }
+        if($request->jenis_kuis == 'essay'){
+            $this->validate($request, [
+                'jenis_kuis' => 'required|string|max:255',
+                'soal_kuis' => 'required|string|max:255',
+                'jawaban_kuis' => 'required|string|max:255',
             ]);
         }
 
-        $kelas = Kelas::find($id);
+        $kelass = Kelas::where('teacher_id', auth()->user()->id)->latest()->first();
 
         // Handle File Upload
         if($request->hasFile('file_topic')){
@@ -238,16 +330,96 @@ class KelasController extends Controller
         if($request->file_topic){
             $kelas->name_topic = $request->input('name_topic');
             $kelas->file_topic = $fileNameToStore;
+            $kelas->save();
         }
         if($request->file_video){
             $kelas->name_video = $request->input('name_video');
             $kelas->file_video = $fileNameToStore;
+            $kelas->save();
         }
-        if($request->file_kuis){
-            $kelas->name_kuis = $request->input('name_kuis');
-            $kelas->file_kuis = $fileNameToStore;
+        if(!!Kuis::where('name_kuis', $kelass->id.'_'.auth()->user()->id.'_'.$request->jenis_kuis)->first()){
+            $name_kuis = $kelass->id.'_'.auth()->user()->id.'_'.$request->jenis_kuis;
+            $i = '1';
+
+            $kuis = new Kuis;
+            $kuis->kelas_id = $kelass->id;
+            $kuis->teacher_id = auth()->user()->id;
+            $kuis->name_kuis = $name_kuis;
+            $kuis->jenis_kuis = $request->jenis_kuis;
+            $kuis->count_kuis = $i;
+
+            if($request->jenis_kuis == 'pilgan'){
+                $kuisFile = fopen("public/file_kelass/".$name_kuis, "w");
+
+                $arr['1']['soal'] = $request->soal_kuis.'\n';
+                $arr['1']['jawaban']['a'] = $request->option1.'\n';
+                $arr['1']['jawaban']['b'] = $request->option2.'\n';
+                $arr['1']['jawaban']['c'] = $request->option3.'\n';
+                $arr['1']['jawaban']['d'] = $request->option4.'\n';
+                $arr['1']['benar'] = $request->jawaban.'\n';
+
+                fwrite($kuisFile, $arr);
+                fclose($kuisFile);
+                $kuis->save();
+            }
+            if($request->jenis_kuis == 'essay'){
+                $kuisFile = fopen("public/file_kelass/".$name_kuis, "w");
+
+                $arr['1']['soal'] = $request->soal_kuis.'\n';
+                $arr['1']['benar'] = $request->jawaban.'\n';
+                
+                fwrite($kuisFile, $txt);
+                fclose($kuisFile);
+                $kuis->save();
+            }
+        }else {
+            $kuis = Kuis::where('name_kuis', $kelass->id.'_'.auth()->user()->id.'_'.$request->jenis_kuis)->first();
+            $i = $kuis->count_kuis;
+
+            if($request->jenis_kuis == 'pilgan'){
+                $kuisFile = fopen("public/file_kelass/".$request->name_kuis, "w");
+                $tempKuis = new SplFileObject($kuisFile);
+
+                while (range($i)) {
+                    $arr[$i]['soal'] = $myFile->fgets() . PHP_EOL;
+                    $arr[$i]['jawaban']['a'] = $myFile->fgets() . PHP_EOL;
+                    $arr[$i]['jawaban']['b'] = $myFile->fgets() . PHP_EOL;
+                    $arr[$i]['jawaban']['c'] = $myFile->fgets() . PHP_EOL;
+                    $arr[$i]['jawaban']['d'] = $myFile->fgets() . PHP_EOL;
+                    $arr[$i]['benar'] = $myFile->fgets() . PHP_EOL;
+                }
+
+                $i += 1;
+                $arr[$i]['soal'] = $request->soal_kuis.'\n';
+                $arr[$i]['jawaban']['a'] = $request->option1.'\n';
+                $arr[$i]['jawaban']['b'] = $request->option2.'\n';
+                $arr[$i]['jawaban']['c'] = $request->option3.'\n';
+                $arr[$i]['jawaban']['d'] = $request->option4.'\n';
+                $arr[$i]['benar'] = $request->jawaban.'\n';
+
+                fwrite($kuisFile, $arr);
+                fclose($kuisFile);
+                $kuis->save();
+            }
+            if($request->jenis_kuis == 'essay'){
+                $kuisFile = fopen("public/file_kelass/".$request->name_kuis, "w");
+                $tempKuis = new SplFileObject($kuisFile);
+
+                while (range($i)) {
+                    $arr[$i]['soal'] = $myFile->fgets() . PHP_EOL;
+                    $arr[$i]['benar'] = $myFile->fgets() . PHP_EOL;
+                }
+
+                $i += 1;
+
+                $arr[$i]['soal'] = $request->soal_kuis.'\n';
+                $arr[$i]['benar'] = $request->jawaban.'\n';
+                
+                fwrite($kuisFile, $txt);
+                fclose($kuisFile);
+                $kuis->save();
+            }
         }
-        $kelas->save();
 
         return redirect()->with('success', 'Kelas Updated');
     }

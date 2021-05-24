@@ -69,7 +69,7 @@ height: 400px;
       <div class="card1">
         <div class="container">
         <div class="col text-center">
-          <br><h4><a class="class1" href="#">Buat Quiz!</a></h4>
+          <br><h4><a class="class1" href="{{ route('kelas.create.jenis.kuis') }}">Buat Quiz!</a></h4>
             </div>
         </div>
       </div>

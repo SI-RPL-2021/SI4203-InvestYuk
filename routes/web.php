@@ -1,8 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KelasController;
+use App\Models\Kelas;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +20,10 @@ use App\Http\Controllers\KelasController;
 
 
 Route::get('/testing', function () {
-    return view('halaman-utama');
+    $arr['test'] = '3';
+    // $id = $arr['test'];
+    // return view('kelas/kelas-buat-materi', ['id' =>  $arr['test']]);
+    return redirect()->route('kelas.create.topic', '3');
 });
 
 
@@ -32,10 +38,14 @@ Route::get('/kelas/{$id}/kuis', [KelasController::class, 'showKuis'])->middlewar
 Route::get('/kelas-buat', [KelasController::class, 'create'])->middleware('auth')->name('kelas.create');
 Route::post('/kelas-buat', [KelasController::class, 'store'])->middleware('auth')->name('kelas.store');
 
-Route::get('/kelas-buat/{$id}/topic', [KelasController::class, 'createTopic'])->middleware('auth')->name('kelas.create.topic');
-Route::get('/kelas-buat/{$id}/video', [KelasController::class, 'createVideo'])->middleware('auth')->name('kelas.create.video');
-Route::get('/kelas-buat/{$id}/kuis', [KelasController::class, 'createKuis'])->middleware('auth')->name('kelas.create.kuis');
-Route::post('/kelas-buat/{$id}', [KelasController::class, 'storeFile'])->middleware('auth')->name('kelas.store.file');
+Route::get('/kelas-buat/topic', [KelasController::class, 'createTopic'])->middleware('auth')->name('kelas.create.topic');
+Route::get('/kelas-buat/video', [KelasController::class, 'createVideo'])->middleware('auth')->name('kelas.create.video');
+Route::get('/kelas-buat/kuis', [KelasController::class, 'createKuis'])->middleware('auth')->name('kelas.create.kuis');
+Route::get('/kelas-buat/jenis-kuis', [KelasController::class, 'createJenisKuis'])->middleware('auth')->name('kelas.create.jenis.kuis');
+Route::get('/kelas-buat/kuis-essay', [KelasController::class, 'createEssayKuis'])->middleware('auth')->name('kelas.create.essay.kuis');
+Route::get('/kelas-buat/kuis-pilgan', [KelasController::class, 'createPilganKuis'])->middleware('auth')->name('kelas.create.pilgan.kuis');
+Route::post('/kelas-buat/jenis-kuis', [KelasController::class, 'storeJenisKuis'])->middleware('auth')->name('kelas.store.jenis.kuis');
+Route::post('/kelas-buat/file', [KelasController::class, 'storeFile'])->middleware('auth')->name('kelas.store.file');
 
 
 // Public Routes

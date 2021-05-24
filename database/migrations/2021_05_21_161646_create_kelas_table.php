@@ -18,12 +18,11 @@ class CreateKelasTable extends Migration
             $table->string('name_kelas');
             $table->foreignId('teacher_id')->constrained('users');
             $table->longText('desc_kelas');
-            $table->string('name_topic');
-            $table->string('file_topic');
+            $table->string('name_topic')->default('topic A');
+            $table->string('file_topic')->default('a desc about topic A');
             $table->string('name_video')->nullable();
             $table->string('file_video')->nullable();
             $table->string('name_kuis')->nullable();
-            $table->string('file_kuis')->nullable();
             $table->mediumInteger('studentSeen')->nullable();
             $table->mediumInteger('studentFinished')->nullable();
             $table->timestamps();

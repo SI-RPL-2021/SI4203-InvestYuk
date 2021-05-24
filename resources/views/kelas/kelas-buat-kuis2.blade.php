@@ -31,27 +31,29 @@ border-radius: 12px;
 
 
 <div class="container">
-<div class="col text-center">
-    <div class="card-body"><br>
-      <h5>Pilih Tipe Soal</h5>
-      <div class="form-check">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-  <label class="form-check-label" for="exampleRadios1">
-    Pilihan Ganda
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-  <label class="form-check-label" for="exampleRadios2">
-    Esai
-  </label>
+  <div class="col text-center">
+    <div class="card-body"><br>      
+      <form method="post" action="{{ route('kelas.store.jenis.kuis') }}">
+      @csrf
+        <fieldset enable>
+          <legend>Pilih Tipe Soal</legend>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="jenisKuis" id="jenisKuis" value="option1" checked>
+              <label class="form-check-label" for="jenisKuis">
+                Pilihan Ganda
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="jenisKuis" id="jenisKuis" value="option2">
+              <label class="form-check-label" for="jenisKuis">
+                Esai
+              </label>
+            </div>
+          <br>
+          <button class="btn btn-primary">Selanjutnya</button>
+      </form>
     </div>
-    <br><a href="#" class="btn btn-primary">Selanjutnya</a>
   </div>
 </div>
-</div>
-</div>
-<br>
 
-</div>
 @endsection
