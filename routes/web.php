@@ -16,47 +16,9 @@ use App\Http\Controllers\KelasController;
 */
 
 
-// Testing Routes
-
-// ubah sesuai dengan nama file yang Anda edit
-// 
-// CONTOH 1:
-// Anda melakukan edit ke file login.blade.php
-// maka
-// Route::get('/testing', function () {
-// return view('login');
-// })->name("login");
-// 
-// CONTOH 2:
-// Anda melakukan edit ke file dashboardStudent.blade.php
-// maka
-// Route::get('/testing', function () {
-// return view('dashboardStudent');
-// })->name("dashboardStudent");
-// 
-// 
-// 
-// 
-// Akses link yang ditampilkan oleh php artisan serve tambahkan 'testing' di akhirnya
-// 
-// misalnya
-// Starting Laravel development server: http://127.0.0.1:8000
-// menjadi
-// http://127.0.0.1:8000/testing
-// 
-
 Route::get('/testing', function () {
     return view('halaman-utama');
 });
-
-Route::get('/testing1', function () {
-    return view('Class/class-join');
-})->name('class-join');
-
-Route::get('/testing2', function () {
-    return view('Class/kelas-join');
-})->name('kelas-join');
-
 
 
 // Authenticated Routes
@@ -70,9 +32,9 @@ Route::get('/kelas/{$id}/kuis', [KelasController::class, 'showKuis'])->middlewar
 Route::get('/kelas-buat', [KelasController::class, 'create'])->middleware('auth')->name('kelas.create');
 Route::post('/kelas-buat', [KelasController::class, 'store'])->middleware('auth')->name('kelas.store');
 
-Route::get('/kelas-buat/{$id}', [KelasController::class, 'createTopic'])->middleware('auth')->name('kelas.create.topic');
-Route::get('/kelas-buat/{$id}', [KelasController::class, 'createVideo'])->middleware('auth')->name('kelas.create.video');
-Route::get('/kelas-buat/{$id}', [KelasController::class, 'createKuis'])->middleware('auth')->name('kelas.create.kuis');
+Route::get('/kelas-buat/{$id}/topic', [KelasController::class, 'createTopic'])->middleware('auth')->name('kelas.create.topic');
+Route::get('/kelas-buat/{$id}/video', [KelasController::class, 'createVideo'])->middleware('auth')->name('kelas.create.video');
+Route::get('/kelas-buat/{$id}/kuis', [KelasController::class, 'createKuis'])->middleware('auth')->name('kelas.create.kuis');
 Route::post('/kelas-buat/{$id}', [KelasController::class, 'storeFile'])->middleware('auth')->name('kelas.store.file');
 
 

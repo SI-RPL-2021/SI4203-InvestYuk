@@ -71,12 +71,10 @@ img {
 						<input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Masukkan Kata Sandi">
 					</div>
 					
-                        <a href="{{ route('success.create') }}" class="btn btn-primary">Sign Up</a>
+                        <button href="" class="btn btn-primary">Sign Up</button>
 					
-						</div>
-					</div>
-					</div>
-				</form>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>

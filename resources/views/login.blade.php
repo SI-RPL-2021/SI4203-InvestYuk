@@ -53,20 +53,17 @@ img {
 
 						<form method="post" action="{{ route('login.store') }}">
 						@csrf
-						<div class="form-group">
-							<label for="email">Email</label>
-							<input type="email" class="form-control" id="email" name="email" aria-describedby="usernameHelp" placeholder="Masukkan Username">
-						</div>
-						<div class="form-group">
-							<label for="password">Kata Sandi</label>
-							<input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Kata Sandi">
-						</div>
+							<div class="form-group">
+								<label for="email">Email</label>
+								<input type="email" class="form-control" id="email" name="email" aria-describedby="usernameHelp" placeholder="Masukkan Username">
+							</div>
+							<div class="form-group">
+								<label for="password">Kata Sandi</label>
+								<input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Kata Sandi">
+							</div>
 							<br><button class="btn btn-success"> Sign In </button> <br><br>
-							<button href="{{ route('register.create') }}" class="btn btn-primary"> Belum punya akun? Register! </button>
-						</div>
-
-					
 						</form>
+						<a href="{{ route('register.create') }}" class="btn btn-primary"> Belum punya akun? Register! </a>
 					</div>
 				</div>
 			</div>

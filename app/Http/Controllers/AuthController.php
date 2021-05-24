@@ -78,7 +78,7 @@ class AuthController extends Controller
         ]);
         User::reguard();
 
-        return redirect(route('login.create')); 
+        return redirect(route('success.create')); 
     }
     function logout(Request $req)
     {
