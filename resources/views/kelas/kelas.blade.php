@@ -71,13 +71,6 @@ border-radius: 15px;
 
 <div class="container">
 <br>
-@foreach ($errors->all() as $error)
-
-	<div class="alert alert-danger mb-3">{{ $error }}</div>
-
-@endforeach
-
-
 <div class="card">
   <div class="card">
     <div class="card-body">
@@ -102,7 +95,6 @@ border-radius: 15px;
 <div class="card-group">
   <div class="container">
     <div class="row-grup">
-      
       <div class="card1">
         <div class="container">
           <h4><a class="class1" href="#">Kelas</a></h4> 
@@ -123,8 +115,6 @@ border-radius: 15px;
             <p>Trading</p> 
         </div>
       </div>
-
-
     </div>
   </div>
 </div>

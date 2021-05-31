@@ -4,19 +4,12 @@
 @endcomponent
 @section('content')
 
-<!-- 
-
-masukkan desain halaman Anda di sini
-
- -->
 <style>
 
 .card-img{
 position: absolute;
-width: 110px;
-height: 107px;
-left: 375px;
-top: 281px;
+padding:  20px;
+margin-top: 30px;
 
 }
 
@@ -26,9 +19,9 @@ height: 107px;
 }
 
 .card10{
-position: absolute;
+  position: absolute;
 width: 910px;
-height: 272px;
+height: 262px;
 left: 265px;
 top: 198px;
 
@@ -39,10 +32,9 @@ border-radius: 12px;
 
 .card1{
 position: absolute;
-width: 515px;
-height: 162px;
-left: 532px;
-top: 172px;
+padding:  20px;
+margin-top: 30px;
+
 
 border: 1px solid #000000;
 box-sizing: border-box;
@@ -50,16 +42,13 @@ border-radius: 12px;
 }
 
 .card2{
-    position: absolute;
-    width: 169px;
+position: absolute;
+width: 169px;
 height: 76px;
-left: 265px;
+left: 355px;
 top: 543px;
 
-background: rgba(196, 196, 196, 0.22);
-border: 1px solid #000000;
-box-sizing: border-box;
-border-radius: 15px;
+
 }
 
 .card3{
@@ -69,10 +58,7 @@ height: 76px;
 left: 650px;
 top: 543px;
 
-background: rgba(196, 196, 196, 0.22);
-border: 1px solid #000000;
-box-sizing: border-box;
-border-radius: 15px;
+
 
 }
 
@@ -80,14 +66,26 @@ border-radius: 15px;
     position: absolute;
 width: 169px;
 height: 76px;
-left: 1006px;
+left: 986px;
 top: 543px;
 
-background: rgba(196, 196, 196, 0.22);
-border: 1px solid #000000;
-box-sizing: border-box;
-border-radius: 15px;
+}
 
+.card5{
+    position: absolute;
+width: 75px;
+height: 39px;
+left: 58px;
+top: 333px;
+
+}
+
+.card6{
+    position: absolute;
+width: 75px;
+height: 39px;
+left: 58px;
+top: 223px;
 }
 
 
@@ -97,50 +95,76 @@ border-radius: 15px;
 
 
 <div class="container">
-<br>
+  <br>
 
-<div class="card10">
-</div>
+ 
 
-<div class="card-img">
-    <img src="https://www.flaticon.com/svg/vstatic/svg/2784/2784445.svg?token=exp=1620011583~hmac=08569afecd22a6a471d512ed341e3f48">
-</div>
+  <div class="card10">
 
-<div class="card">
-  <div class="card1">
-    <div class="card-body">
-      <h5 class="card-title">Info  Kelas</h5>
-      <p class="card-text">Saham Adalah suatu dokumen berharga yang mampu menampilkan bagian kepemilikan dari suatu perusahaan.</p>
-    </div>
+  <div class="container">
+        <div class="row g-0">
+
+          <div class="col-sm-5">
+                <div class="card-img">
+                    <img src="https://www.flaticon.com/svg/vstatic/svg/2784/2784445.svg?token=exp=1620011583~hmac=08569afecd22a6a471d512ed341e3f48">
+                </div>
+          </div>
+                
+              
+
+              <div class="col-md-6">
+                <div class="card1">
+                    <h5 class="card-title">Info  Kelas</h5>
+                    <p class="card-text">Saham Adalah suatu dokumen berharga yang mampu menampilkan bagian kepemilikan dari suatu perusahaan.</p>
+                </div>
+              </div>
+        </div>
+  </div> 
   </div>
-</div>
+
+  
 </div>
 
 <br>
+
+
+
 
 <div class="card-group">
   <div class="container">
+
     <div class="row-grup">
       <div class="card2">
-        <div class="container">
-          <h4><a class="video" href="#">Video</a></h4> 
-        </div>
+          <button type="button" class="btn btn-secondary btn-lg" href="#">Video</button>
       </div>
-  
+
       <div class="card3">
-        <div class="container">
-            <h4><a class="materi" href="#">Materi</a></h4>  
-        </div>
+        <button type="button" class="btn btn-secondary btn-lg" href="#">Materi</button>
       </div>
 
       <div class="card4">
-        <div class="container">
-        <h4><a class="quiz" href="#">Quiz</a></h4> 
-        </div>
+        <button type="button" class="btn btn-secondary btn-lg" href="#">Quiz</button>
       </div>
+
     </div>
   </div>
+
+  <div class="card-group">
+    <div class="container">
+
+      <div class="card5">
+            <button type="button" class="btn btn-secondary btn-lg" href="#">Review</button>
+      </div>
+
+      <div class="card6">
+        <button type="button" class="btn btn-secondary btn-lg" href="#">Learning</button>
+      </div>
+
+    </div>
+  </div>
+  
 </div>
+
 
 
 @endsection
