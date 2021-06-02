@@ -46,6 +46,9 @@ class KelasController extends Controller
     {
         // masukin bagian student seen
         // kemungkinan besar pake cookies, dicek kalau udah punya, berarti gak usah nambahin
+        // atau buat tabel yg ngehubungin user sama kelas, cuma untuk seen doang
+        // nanti buat tabel yg ngehubungin user sama kelas, buat nyimpen done dan selesai
+        // boros, tapi keknya emng harus gitu
 
         //munculin halaman materi
         $kelass = Kelas::find($id);
@@ -62,7 +65,6 @@ class KelasController extends Controller
         //munculin halaman Topic
         // $kelass = Kelas::find($id);
         // return view('kelas/kelas-join-materi')->with('kelass', $kelass);
-        // return redirect();
     }
 
     /**
@@ -72,10 +74,7 @@ class KelasController extends Controller
      */
     public function showVideo($id)
     {
-        //munculin halaman video
-        // $kelass = Kelas::find($id);
-        // return view('kelas/kelas-join-video')->with('kelass', $kelass);
-        // return redirect();
+        // kasi tahu kalau kelas itu gak punya video atau kuis
     }
 
     /**
@@ -85,10 +84,7 @@ class KelasController extends Controller
      */
     public function showKuis($id)
     {
-        //munculin halaman Kuis
-        // $kelass = Kelas::find($id);
-        // return view('kelas/kelas-join-kuis')->with('kelass', $kelass);
-        // return redirect();
+        // kasi tahu kalau kelas itu gak punya video atau kuis
     }
 
 
@@ -377,6 +373,8 @@ class KelasController extends Controller
                 
                 $kuis->file_kuis = $kuisFile;
                 $kuis->save();
+
+                $kelas->file_kuis = $name_kuis;
             }
             if($request->jenis_kuis == 'essay'){
                 $kuisFile = fopen($_SERVER['DOCUMENT_ROOT']."\\storage\\file_kelass\\".$name_kuis.".txt", "w");
@@ -389,10 +387,18 @@ class KelasController extends Controller
                 
                 fwrite($kuisFile, $longString);
                 fclose($kuisFile);
+
+                $kuis->file_kuis = $kuisFile;
                 $kuis->save();
+
+                $kelas->file_kuis = $name_kuis;
             }
+
+            $kelas->name_kuis = $name_kuis;
+            $kelas->save();
         }else {
-            $kuis = Kuis::where('name_kuis', $kelas->id.'_'.auth()->user()->id.'_'.$request->jenis_kuis)->first();
+            $name_kuis = $kelas->id.'_'.auth()->user()->id.'_'.$request->jenis_kuis;
+            $kuis = Kuis::where('name_kuis', $name_kuis)->first();
             $i = $kuis['count_kuis'];
             $i += 1;
 
@@ -418,7 +424,11 @@ class KelasController extends Controller
                 
                 fwrite($kuisFile, $combineString);
                 fclose($kuisFile);
+                
+                $kuis->file_kuis = $kuisFile;
                 $kuis->save();
+                
+                $kelas->file_kuis = $name_kuis;
             }
             if($request->jenis_kuis == 'essay'){
                 $pathFile = $_SERVER['DOCUMENT_ROOT']."\\storage\\file_kelass\\".$kuis->name_kuis.".txt";
@@ -438,11 +448,18 @@ class KelasController extends Controller
                 
                 fwrite($kuisFile, $combineString);
                 fclose($kuisFile);
+                
+                $kuis->file_kuis = $kuisFile;
                 $kuis->save();
+                
+                $kelas->file_kuis = $name_kuis;
             }
-        }
 
+            $kelas->name_kuis = $name_kuis;
+            $kelas->save();
+        }
         return redirect()->back()->with('success', 'Kelas Updated');
+        // success msg still not working
     }
 
 
