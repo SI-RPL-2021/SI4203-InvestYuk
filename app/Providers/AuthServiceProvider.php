@@ -26,5 +26,28 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         //
+
+        // Gate::define('update-post', [PostPolicy::class, 'update']);
+        // 
+        // Gate::define('update-post', function (User $user, Post $post) {
+        //     return $user->id === $post->user_id;
+        // });
+
+        // Gate::define('edit-settings', function (User $user) {
+        //     return $user->isAdmin
+        //                 ? Response::allow()
+        //                 : Response::deny('You must be an administrator.');
+        // });
+        // 
+        // 
+        // $response = Gate::inspect('edit-settings');
+        // 
+        // if ($response->allowed()) {
+        //     // The action is authorized...
+        // } else {
+        //     echo $response->message();
+        // }
+
+
     }
 }
