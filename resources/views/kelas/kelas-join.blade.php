@@ -6,17 +6,6 @@
 
 <style>
 
-.card-img{
-position: absolute;
-padding:  20px;
-margin-top: 30px;
-
-}
-
-img {
-width: 110px;
-height: 107px;
-}
 
 .card10{
   position: absolute;
@@ -76,58 +65,34 @@ top: 543px;
 width: 75px;
 height: 39px;
 left: 58px;
-top: 333px;
-
+top: 290px;
 }
-
-.card6{
-    position: absolute;
-width: 75px;
-height: 39px;
-left: 58px;
-top: 223px;
-}
-
-
-
 
 </style>
+
 
 
 <div class="container">
   <br>
 
- 
 
   <div class="card10">
-
-  <div class="container">
-        <div class="row g-0">
-
-          <div class="col-sm-5">
-                <div class="card-img">
-                    <img src="https://www.flaticon.com/svg/vstatic/svg/2784/2784445.svg?token=exp=1620011583~hmac=08569afecd22a6a471d512ed341e3f48">
+    <div class="container">
+          <div class="row ">
+                <div class="col-md-4 mx-auto">
+                  <div class="card1">
+                      <h5 class="card-title">Info  Kelas</h5>
+                      <p class="card-text">Saham Adalah suatu dokumen berharga yang mampu menampilkan bagian kepemilikan dari suatu perusahaan.</p>
+                  </div>
                 </div>
           </div>
-                
-              
-
-              <div class="col-md-6">
-                <div class="card1">
-                    <h5 class="card-title">Info  Kelas</h5>
-                    <p class="card-text">Saham Adalah suatu dokumen berharga yang mampu menampilkan bagian kepemilikan dari suatu perusahaan.</p>
-                </div>
-              </div>
-        </div>
-  </div> 
+    </div> 
   </div>
 
   
 </div>
 
 <br>
-
-
 
 
 <div class="card-group">
@@ -154,10 +119,6 @@ top: 223px;
 
       <div class="card5">
             <button type="button" class="btn btn-secondary btn-lg" href="#">Review</button>
-      </div>
-
-      <div class="card6">
-        <button type="button" class="btn btn-secondary btn-lg" href="#">Learning</button>
       </div>
 
     </div>
