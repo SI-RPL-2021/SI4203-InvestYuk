@@ -25,6 +25,9 @@ Route::get('/testing', function () {
     // return view('kelas/kelas-buat-materi', ['id' =>  $arr['test']]);
     return redirect()->route('kelas.create.topic', '3');
 });
+Route::get('/', function () {
+    return view('pengajuan-status-admin');
+});
 
 
 // Authenticated Routes
