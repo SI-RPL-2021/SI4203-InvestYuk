@@ -26,7 +26,7 @@ Route::get('/testing', function () {
     return redirect()->route('kelas.create.topic', '3');
 });
 Route::get('/', function () {
-    return view('pengajuan-status-admin');
+    return view('notifikasi-pengajuan-status-ditolak');
 });
 
 
