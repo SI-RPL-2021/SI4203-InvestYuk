@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use App\Models\User;
 
 class AuthController extends Controller
@@ -33,13 +34,18 @@ class AuthController extends Controller
     {
         return view('berhasil-register');
     }
-    
+
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        
+        $email = $request->email;
+        $data = User::where('email', $email)->first();
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+            Session::put('id', $data->id);
+            Session::put('name', $data->name);
+            Session::put('email', $data->email);
+            Session::put('login', TRUE);
 
             return redirect()->intended('/');
         }
@@ -63,7 +69,7 @@ class AuthController extends Controller
             $credentials['role'] = 'Admin';
             User::unguard();
         }
-        
+
         if (User::where('email', $credentials['email'])->exists()) {
             return back()->withErrors([
                 'email' => 'The email is already taken.'
@@ -78,16 +84,16 @@ class AuthController extends Controller
         ]);
         User::reguard();
 
-        return redirect(route('success.create')); 
+        return redirect(route('success.create'));
     }
-    function logout(Request $req)
+    function logout(Request $request)
     {
         Auth::logout();
-    
+        Session::flush();
         $request->session()->invalidate();
-    
+
         $request->session()->regenerateToken();
-    
+
         return redirect(route('home'));
-    }    
+    }
 }
