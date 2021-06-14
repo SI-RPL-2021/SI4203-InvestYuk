@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use App\Models\Kelas;
 use App\Models\Kuis;
 use App\Models\User;
@@ -18,7 +19,9 @@ class KelasController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth', ['except' => 
+        // showVideo dan showKuis diberi authentication manual di view
+        ['index', 'show', 'showTopic']]);
     }
     
     /**
@@ -31,6 +34,12 @@ class KelasController extends Controller
         $users = User::all();
         $kelass = Kelas::orderBy('created_at','desc')->paginate(10);
         return view('kelas/kelas', ['kelass'=>$kelass, 'users'=>$users]);
+    }
+    public function dashboard()
+    {
+        $user = User::find(auth()->user()->id);
+        $kelass = Kelas::where('teacher_id', $user->id)->get();
+        return view('dashboard', ['user'=>$user, 'kelass'=>$kelass]);
     }
 
 
@@ -50,9 +59,15 @@ class KelasController extends Controller
         // nanti buat tabel yg ngehubungin user sama kelas, buat nyimpen done dan selesai
         // boros, tapi keknya emng harus gitu
 
-        //munculin halaman materi
-        $kelass = Kelas::find($id);
-        return view('kelas/kelas-join')->with('kelass', $kelass);
+        // hapus session variable jika user sempat melakuka kuis sebelumnya
+        Session::forget('numSoal');
+        Session::forget('arrSoal');
+        Session::forget('arrJawaban');
+        Session::forget('cocokJawaban');
+        Session::forget('totBenar');
+
+        $kelas = Kelas::find($id);
+        return view('kelas/kelas-join')->with('kelas', $kelas);
     }
 
     /**
@@ -62,9 +77,8 @@ class KelasController extends Controller
      */
     public function showTopic($id)
     {
-        //munculin halaman Topic
-        // $kelass = Kelas::find($id);
-        // return view('kelas/kelas-join-materi')->with('kelass', $kelass);
+        $kelas = Kelas::find($id);
+        return view('kelas/menonton-materi')->with('kelas', $kelas);
     }
 
     /**
@@ -74,7 +88,8 @@ class KelasController extends Controller
      */
     public function showVideo($id)
     {
-        // kasi tahu kalau kelas itu gak punya video atau kuis
+        $kelas = Kelas::find($id);
+        return view('kelas/menonton-video')->with('kelas', $kelas);
     }
 
     /**
@@ -84,13 +99,77 @@ class KelasController extends Controller
      */
     public function showKuis($id)
     {
-        // kasi tahu kalau kelas itu gak punya video atau kuis
+        $kelas = Kelas::find($id);
+        $kuis = Kuis::where("kelas_id", $id)->first();
+        
+        if(Session::get('numSoal') == null){
+            Session::put('numSoal', 1);
+
+            //unpack kuisnya        
+            $pathFile = $_SERVER['DOCUMENT_ROOT']."\\storage\\file_kelass\\".$kuis->name_kuis.".txt";
+            $testFile = fopen($pathFile, "r");        
+            $fileReaded = fread($testFile, filesize($pathFile));
+            
+            $arrKuis = explode('$%^', $fileReaded);
+
+            
+            if($kuis->jenis_kuis == 'pilgan'){
+                for ($i=0; $i < $kuis->count_kuis; $i++) { 
+                    $arrSoal[$i] = $arrKuis[6*$i + 1];
+                    $arrJawaban[$i] = $arrKuis[6*$i + 6];
+                    // for ($j=$i; $j < 4; $j++) { 
+                        //     $arrPilihan[$j] = $arrKuis[$j + 2];
+                        // }
+                    }
+            }else{
+                for ($i=0; $i < $kuis->count_kuis; $i++) { 
+                    $arrSoal[$i] = $arrKuis[3*$i + 1];
+                    $arrJawaban[$i] = $arrKuis[3*$i + 2];
+                }
+            }
+            Session::put('arrSoal', $arrSoal);
+            Session::put('arrJawaban', $arrJawaban);
+            
+            fclose($testFile);
+            
+        } else{
+            if(Session::get('numSoal') <= $kuis->count_kuis){
+                Session::put('numSoal', Session::get('numSoal') + 1);
+            }
+        }
+        return view('kelas/menonton-kuis')->with(['kelas' => $kelas, 'kuis' => $kuis]);
+    }
+    public function resultKuis($id, Request $request)
+    {
+        $kelas = Kelas::find($id);
+        $kuis = Kuis::where("kelas_id", $id)->first();
+        $cocokJawaban = $request->jawaban_kuis;
+
+        if(Session::get('cocokJawaban') == null){
+            Session::put('cocokJawaban', [$cocokJawaban]);
+            if(Session::get('numSoal') != 1){
+                for ($i=0; $i < $kuis->count_kuis; $i++) { 
+                    Session::put('cocokJawaban', [' ']);
+                }
+            }
+        } else{
+            Session::push('cocokJawaban', $cocokJawaban);
+        }
+        
+        
+        if(($cocokJawaban) == Session::get('arrJawaban')[Session::get('numSoal') - 1]){
+            Session::put('totBenar', Session::get('totBenar') + 1);
+        } else{
+            Session::put('totBenar', Session::get('totBenar') + 0);
+        }
+        
+        return redirect()->route('kelas.show.kuis', $kelas->id);
     }
 
 
 
 
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -425,6 +504,7 @@ class KelasController extends Controller
                 fwrite($kuisFile, $combineString);
                 fclose($kuisFile);
                 
+                $kuis->count_kuis = $i;
                 $kuis->file_kuis = $kuisFile;
                 $kuis->save();
                 
@@ -449,6 +529,7 @@ class KelasController extends Controller
                 fwrite($kuisFile, $combineString);
                 fclose($kuisFile);
                 
+                $kuis->count_kuis = $i;
                 $kuis->file_kuis = $kuisFile;
                 $kuis->save();
                 

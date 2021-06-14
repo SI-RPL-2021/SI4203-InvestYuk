@@ -20,11 +20,6 @@ top: 281px;
 
 }
 
-img {
-width: 110px;
-height: 107px;
-}
-
 .card10{
 position: absolute;
 width: 910px;
@@ -102,15 +97,11 @@ border-radius: 15px;
 <div class="card10">
 </div>
 
-<div class="card-img">
-    <img src="https://www.flaticon.com/svg/vstatic/svg/2784/2784445.svg?token=exp=1620011583~hmac=08569afecd22a6a471d512ed341e3f48">
-</div>
-
 <div class="card">
   <div class="card1">
     <div class="card-body">
-      <h5 class="card-title">Info  Kelas</h5>
-      <p class="card-text">Saham Adalah suatu dokumen berharga yang mampu menampilkan bagian kepemilikan dari suatu perusahaan.</p>
+      <h5 class="card-title">{{ $kelas->name_kelas }}</h5>
+      <p class="card-text">{{ $kelas->desc_kelas }}</p>
     </div>
   </div>
 </div>
@@ -123,24 +114,73 @@ border-radius: 15px;
     <div class="row-grup">
       <div class="card2">
         <div class="container">
-          <h4><a class="video" href="#">Video</a></h4> 
+          <h4> <a href="" data-toggle="modal" data-target="#exampleModal" 
+          data-auth="{{ Auth::check() }}"
+          data-route="{{ route('kelas.show.video', $kelas->id) }}"
+          data-p="Anda akan melihat video materi kelas ini" data-a="Lihat Video">
+          Video
+          </a> </h4> 
         </div>
       </div>
   
       <div class="card3">
         <div class="container">
-            <h4><a class="materi" href="#">Materi</a></h4>  
+            <h4><a href="{{ route('kelas.show.topic', $kelas->id) }}">Materi</a></h4>  
         </div>
       </div>
 
       <div class="card4">
         <div class="container">
-        <h4><a class="quiz" href="#">Quiz</a></h4> 
+        <h4> <a href="" data-toggle="modal" data-target="#exampleModal" 
+        data-auth="{{ Auth::check() }}"
+        data-route="{{ route('kelas.show.kuis', $kelas->id) }}" 
+        data-p="Apakah Anda siap melakukan kuis?" data-a="Lakukan Kuis">
+        Quiz
+        </a> </h4> 
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>Anda harus login untuk bisa mengakses fitur ini</p>
+            <div class="form-group">
+                <a href="{{ route('login.create') }}" class="btn btn-primary btn-block">Login</a>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<script>
+$('#exampleModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var penjelasan = button.data('p') // Extract info from data-* attributes
+    var ahref = button.data('a')
+    var route = button.data('route')
+    var auth = button.data('auth')
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    
+    if(auth == true){
+        modal.find('.modal-body p').text(penjelasan)
+        modal.find('.modal-body a').text(ahref)
+        modal.find('.modal-body a').attr("href", route)
+    }
+})
+
+</script>
 
 
 @endsection
