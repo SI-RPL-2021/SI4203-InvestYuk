@@ -11,18 +11,6 @@ use App\Models\Kelas;
 
 class AuthController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth', ['except' => 
-        ['dashboard', 'ajuStatusCreate', 'ajuStatusStore', 'ajuStatusShow']]);
-    }
-
-
     public function dashboard()
     {
         $user = User::find(auth()->user()->id);
@@ -67,19 +55,6 @@ class AuthController extends Controller
             }
         }
         return redirect()->view('ajustatus/pengajuan-status-admin-berhasil');
-    }
-    public function ajuStatusAdminUpdate($id)
-    {
-        $user = User::find(auth()->user()->$id);
-        dd(auth()->user());
-        if($user->ajuStatus == 'Accepted'){
-            $user->role = 'Teacher';
-        }
-
-        $user->ajuStatus = null;
-        $user->save();
-        
-        return redirect(route('home'));
     }
     public function ajuStatusStudentCreate()
     {        

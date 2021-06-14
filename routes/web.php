@@ -32,12 +32,9 @@ Route::get('/testing', function () {
 
 // Authenticated Routes
 
-Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
-// Route::get('/ajuStatus', [AuthController::class, 'ajuStatusAdminCreate'])->name('ajuStatus.admin.create');
-// Route::post('/ajuStatus', [AuthController::class, 'ajuStatusAdminStore'])->name('ajuStatus.admin.store');
-// Route::pot('/ajuStatus/{id}', [AuthController::class, 'ajuStatusAdminUpdate'])->name('ajuStatus.admin.update');
-Route::get('/ajuStatus/motivasi', [AuthController::class, 'ajuStatusStudentCreate'])->name('ajuStatus.student.create');
-Route::post('/ajuStatus/motivasi', [AuthController::class, 'ajuStatusStudentStore'])->name('ajuStatus.student.store');
+Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware('auth')->name('dashboard');
+Route::get('/ajuStatus/motivasi', [AuthController::class, 'ajuStatusStudentCreate'])->middleware('auth')->name('ajuStatus.student.create');
+Route::post('/ajuStatus/motivasi', [AuthController::class, 'ajuStatusStudentStore'])->middleware('auth')->name('ajuStatus.student.store');
 
 Route::get('/kelas/{id}', [KelasController::class, 'show'])->name('kelas.show');
 Route::get('/kelas/{id}/topic', [KelasController::class, 'showTopic'])->name('kelas.show.topic');
