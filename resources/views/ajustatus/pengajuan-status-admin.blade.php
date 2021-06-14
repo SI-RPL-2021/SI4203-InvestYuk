@@ -54,22 +54,28 @@ top: 56px;
                     </tr>
                 </thead>
                 <tbody>
-                    @for ($i = 0; $i < count($users); $i++)
+                    @foreach ($users as $user)
                     <tr>
-                    <td>alalalala</td>
-                    <td>{{ 'setuju'.$i }}</td>
-                    <td> <div class="form-check form-switch">
-                    <input type="checkbox" name="{{ 'setuju'.$i }}" checked data-toggle="toggle" data-on="Ya" data-off="Tidak" data-onstyle="success" data-offstyle="danger">
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->motivasi }}</td>
+                    <td> 
+                    <input type="hidden" name="{{ $user->id }}" value="0" checked data-toggle="toggle" data-on="Ya" data-off="Tidak" data-onstyle="success" data-offstyle="danger">
+                    <div class="form-check form-switch">
+                    <input type="checkbox" name="{{ $user->id }}" value="1" checked data-toggle="toggle" data-on="Ya" data-off="Tidak" data-onstyle="success" data-offstyle="danger">
                     </div> </td>
                     </tr>
-                    @endfor
+                    @endforeach
                 </tbody>
             
             </table>
             
-            <div class="form-group text-center">
-                <button href="#" class="btn btn-success align-middle">Konfirmasi</button>
-            </div>
+            @if(count($users) == 0)
+                <p class="form-group text-center">Tidak ada pengajuan perubahan status</p>
+            @else
+                <div class="form-group text-center">
+                    <button href="#" class="btn btn-success align-middle">Konfirmasi</button>
+                </div>
+            @endif
         </form>
     </div>
 </div>

@@ -31,7 +31,7 @@ border-radius: 12px;
 <div class="col text-center">
     <div class="card-body"><br>
       <h5>Aplikasi pengajuan status telah berhasil tersimpan. Selanjutnya aplikasi pengajuan akan diinformasikan ke User terkait.</h5>
-    <br><a href="#" class="btn btn-success">Kembali ke Menu Utama</a>
+    <br><a href="{{ route('home') }}" class="btn btn-success">Kembali ke Menu Utama</a>
   </div>
 </div>
 </div>

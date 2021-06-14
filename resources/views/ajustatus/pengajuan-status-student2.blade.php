@@ -32,12 +32,17 @@ border-radius: 12px;
 
 <div class="container">
     <div class="card-body1"><br>
-    <div class="col text-center">
-    <h5>Motivasi</h5><br>
-    <form>
-    <div class="form-group">
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-  </div>
-  <br><button type="submit" class="btn btn-success">Submit</button>
-</form>
+        <form method="post" action="{{ route('ajuStatus.student.store', $user->id) }}">
+        @csrf
+            <div class="col text-center">
+                <div class="form-group">
+                    <h5 for="motivasi">Motivasi</h5><br>
+                    <textarea class="form-control" id="motivasi" name="motivasi" rows="3"></textarea>
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+</div>
 @endsection

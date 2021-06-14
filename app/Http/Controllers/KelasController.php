@@ -35,13 +35,6 @@ class KelasController extends Controller
         $kelass = Kelas::orderBy('created_at','desc')->paginate(10);
         return view('kelas/kelas', ['kelass'=>$kelass, 'users'=>$users]);
     }
-    public function dashboard()
-    {
-        $user = User::find(auth()->user()->id);
-        $kelass = Kelas::where('teacher_id', $user->id)->get();
-        return view('dashboard', ['user'=>$user, 'kelass'=>$kelass]);
-    }
-
 
 
 

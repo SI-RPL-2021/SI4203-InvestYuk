@@ -18,7 +18,7 @@ admin list user untuk bisa diubah jadi teacher
 
 @if(auth()->user()->role == 'Admin')
     <a class="btn btn-block btn-primary" href="{{ route('createCourse') }}"> Buat Learning Path </a>
-    <a class="btn btn-block btn-primary" href="{{ route('ajuStatus.create') }}"> Lihat Aju Status </a>
+    <a class="btn btn-block btn-primary" href="{{ route('ajuStatus.admin.create') }}"> Lihat Aju Status </a>
 @else
     <!-- update data user, belakangan -->
 
@@ -46,11 +46,11 @@ admin list user untuk bisa diubah jadi teacher
     </table>
     @elseif(auth()->user()->role == 'Student')
     
-
-
-
-
-
+    <div class="text-right">
+        <a href="{{ route('ajuStatus.student.create', $user->id) }}" class="btn btn-block btn-primary">
+            Ajukan Pengubahan Status
+        </a>
+    </div>
     @endif
 @endif
 

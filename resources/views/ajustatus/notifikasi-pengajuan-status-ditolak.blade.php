@@ -4,12 +4,6 @@
 @endcomponent
 @section('content')
 
-<!-- 
-
-masukkan desain halaman Anda di sini
-
- -->
-
 <style>
 
 .card-body{
@@ -31,7 +25,7 @@ border-radius: 12px;
 <div class="col text-center">
     <div class="card-body"><br>
       <h5>Sayangnya, Proses pengajuan Anda ditolak, Yuk masih ada kesempatan untuk mencoba kembali</h5>
-    <br><a href="#" class="btn btn-success">Kembali ke Menu Utama</a>
+    <br><a href="{{ route('ajuStatus.admin.update', $user->id) }}" class="btn btn-success">Kembali ke Menu Utama</a>
   </div>
 </div>
 </div>

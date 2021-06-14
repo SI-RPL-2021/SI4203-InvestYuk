@@ -32,9 +32,12 @@ Route::get('/testing', function () {
 
 // Authenticated Routes
 
-Route::get('/dashboard', [KelasController::class, 'dashboard'])->name('dashboard');
-Route::get('/ajuStatus', [AuthController::class, 'ajuStatusCreate'])->name('ajuStatus.create');
-Route::post('/ajuStatus', [AuthController::class, 'ajuStatusStore'])->name('ajuStatus.store');
+Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+Route::get('/ajuStatus', [AuthController::class, 'ajuStatusAdminCreate'])->name('ajuStatus.admin.create');
+Route::post('/ajuStatus', [AuthController::class, 'ajuStatusAdminStore'])->name('ajuStatus.admin.store');
+Route::get('/ajuStatus/{id}', [AuthController::class, 'ajuStatusAdminUpdate'])->name('ajuStatus.admin.update');
+Route::get('/ajuStatus/motivasi', [AuthController::class, 'ajuStatusStudentCreate'])->name('ajuStatus.student.create');
+Route::post('/ajuStatus/motivasi', [AuthController::class, 'ajuStatusStudentStore'])->name('ajuStatus.student.store');
 
 Route::get('/kelas/{id}', [KelasController::class, 'show'])->name('kelas.show');
 Route::get('/kelas/{id}/topic', [KelasController::class, 'showTopic'])->name('kelas.show.topic');

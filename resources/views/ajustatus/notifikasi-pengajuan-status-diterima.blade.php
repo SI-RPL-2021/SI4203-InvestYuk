@@ -31,7 +31,7 @@ border-radius: 12px;
 <div class="col text-center">
     <div class="card-body"><br>
       <h5>Selamat Anda salah satu orang yang telah diterima dan diangkat menjadi Teacher, Selamat Berhabung!</h5>
-    <br><a href="#" class="btn btn-success">Kembali ke Menu Utama</a>
+    <br><a href="{{ route('ajuStatus.admin.update', $user->id) }}" class="btn btn-success">Kembali ke Menu Utama</a>
   </div>
 </div>
 </div>
