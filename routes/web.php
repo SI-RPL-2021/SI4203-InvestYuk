@@ -35,7 +35,7 @@ Route::get('/testing', function () {
 Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
 Route::get('/ajuStatus', [AuthController::class, 'ajuStatusAdminCreate'])->name('ajuStatus.admin.create');
 Route::post('/ajuStatus', [AuthController::class, 'ajuStatusAdminStore'])->name('ajuStatus.admin.store');
-Route::get('/ajuStatus/{id}', [AuthController::class, 'ajuStatusAdminUpdate'])->name('ajuStatus.admin.update');
+Route::pot('/ajuStatus/{id}', [AuthController::class, 'ajuStatusAdminUpdate'])->name('ajuStatus.admin.update');
 Route::get('/ajuStatus/motivasi', [AuthController::class, 'ajuStatusStudentCreate'])->name('ajuStatus.student.create');
 Route::post('/ajuStatus/motivasi', [AuthController::class, 'ajuStatusStudentStore'])->name('ajuStatus.student.store');
 

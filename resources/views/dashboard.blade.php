@@ -47,8 +47,8 @@ admin list user untuk bisa diubah jadi teacher
     @elseif(auth()->user()->role == 'Student')
     
     <div class="text-right">
-        <a href="{{ route('ajuStatus.student.create', $user->id) }}" class="btn btn-block btn-primary">
-            Ajukan Pengubahan Status
+        <a href="{{ route('ajuStatus.student.create') }}" class="btn btn-block btn-primary">
+            Ajukan Pengubahan Status ad
         </a>
     </div>
     @endif

@@ -36,6 +36,8 @@ class AuthController extends Controller
                 return view('ajustatus/notifikasi-pengajuan-status-diterima')->with('user', $user);
             }
         }
+
+        // dd($user->id);
         return view('dashboard', ['user'=>$user, 'kelass'=>$kelass]);
     }
 
@@ -69,7 +71,7 @@ class AuthController extends Controller
     public function ajuStatusAdminUpdate($id)
     {
         $user = User::find(auth()->user()->$id);
-        dd($user);
+        dd(auth()->user());
         if($user->ajuStatus == 'Accepted'){
             $user->role = 'Teacher';
         }
@@ -79,13 +81,14 @@ class AuthController extends Controller
         
         return redirect(route('home'));
     }
-    public function ajuStatusStudentCreate($id)
+    public function ajuStatusStudentCreate()
     {        
-        return view('ajustatus/pengajuan-status-student2.blade');
+        dd($id);
+        return redirect()->view('ajustatus/pengajuan-status-student2.blade')->with('id', auth()->user()->id);
     }
-    public function ajuStatusStudentStore(Request $request, $id)
+    public function ajuStatusStudentStore(Request $request)
     {
-        $user = User::find($id);
+        $user = User::find(auth()->user()->$id);
         $user->motivasi = $request->motivasi;
         $user->save();
         
