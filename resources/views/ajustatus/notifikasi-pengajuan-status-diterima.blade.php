@@ -30,10 +30,15 @@ border-radius: 12px;
 <div class="container">
 <div class="col text-center">
     <div class="card-body"><br>
-      <h5>Selamat Anda salah satu orang yang telah diterima dan diangkat menjadi Teacher, Selamat Berhabung!</h5>
-    <br><a href="{{ route('ajuStatus.admin.update', $user->id) }}" class="btn btn-success">Kembali ke Menu Utama</a>
-  </div>
-</div>
+        <form method="post" action="{{ route('ajuStatus.admin.update', $user->id) }}">
+        @csrf
+            <h5>Selamat Anda salah satu orang yang telah diterima dan diangkat menjadi Teacher, Selamat Berhabung!</h5>            
+            <input type="hidden" name="noname" value="null">
+            <button type="submit" class="btn btn-success">
+                Kembali ke Menu Utama
+            </button>
+        </form>
+    </div>
 </div>
 </div>
 <br>

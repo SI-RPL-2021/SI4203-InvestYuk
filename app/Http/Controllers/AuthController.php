@@ -25,7 +25,6 @@ class AuthController extends Controller
             }
         }
 
-        // dd($user->id);
         return view('dashboard', ['user'=>$user, 'kelass'=>$kelass]);
     }
 
@@ -33,7 +32,6 @@ class AuthController extends Controller
     public function ajuStatusAdminCreate()
     {
         $users = User::where('ajuStatus', 'Pending')->get();
-        // dd('daura');
         return view('ajustatus/pengajuan-status-admin')->with('users', $users);
     }
     public function ajuStatusAdminStore(Request $request)
@@ -41,11 +39,8 @@ class AuthController extends Controller
         $datas = $request->all();
         $user = User::where('ajuStatus', 'Pending')->get()->keyBy('id');
 
-        // dd($datas);
-        // dd($user);
         foreach($datas as $data => $value){
             if($data == '_token') continue;
-            // dd($value == "0");
             if($value == "0"){
                 $user[$data]->ajuStatus = 'Rejected';
                 $user[$data]->save();
@@ -54,20 +49,33 @@ class AuthController extends Controller
                 $user[$data]->save();
             }
         }
-        return redirect()->view('ajustatus/pengajuan-status-admin-berhasil');
+        return view('ajustatus/pengajuan-status-admin-berhasil');
     }
     public function ajuStatusStudentCreate()
     {        
-        dd($id);
-        return redirect()->view('ajustatus/pengajuan-status-student2.blade')->with('id', auth()->user()->id);
+        return view('ajustatus/pengajuan-status-student2')->with('id', auth()->user()->id);
     }
     public function ajuStatusStudentStore(Request $request)
     {
-        $user = User::find(auth()->user()->$id);
+        $user = User::find(auth()->user()->id);
+        $user->ajuStatus = 'Pending';
         $user->motivasi = $request->motivasi;
         $user->save();
         
-        return redirect()->route('ajustatus/pengajuan-status-student-berhasil');
+        return view('ajustatus/pengajuan-status-student-berhasil');
+    }
+    public function ajuStatusAdminUpdate(Request $request, $id)
+    {
+        $user = User::find(auth()->user()->id);
+        
+        if($user->ajuStatus == 'Accepted'){
+            $user->role = 'Teacher';
+        }
+
+        $user->ajuStatus = null;
+        $user->save();
+        
+        return redirect()->route('home');
     }
 
 

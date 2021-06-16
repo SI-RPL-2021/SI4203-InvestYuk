@@ -33,8 +33,11 @@ Route::get('/testing', function () {
 // Authenticated Routes
 
 Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware('auth')->name('dashboard');
+Route::get('/ajuStatus', [AuthController::class, 'ajuStatusAdminCreate'])->middleware('auth')->name('ajuStatus.admin.create');
+Route::post('/ajuStatus', [AuthController::class, 'ajuStatusAdminStore'])->middleware('auth')->name('ajuStatus.admin.store');
 Route::get('/ajuStatus/motivasi', [AuthController::class, 'ajuStatusStudentCreate'])->middleware('auth')->name('ajuStatus.student.create');
 Route::post('/ajuStatus/motivasi', [AuthController::class, 'ajuStatusStudentStore'])->middleware('auth')->name('ajuStatus.student.store');
+Route::post('/ajuStatus/{id}', [AuthController::class, 'ajuStatusAdminUpdate'])->middleware('auth')->name('ajuStatus.admin.update');
 
 Route::get('/kelas/{id}', [KelasController::class, 'show'])->name('kelas.show');
 Route::get('/kelas/{id}/topic', [KelasController::class, 'showTopic'])->name('kelas.show.topic');

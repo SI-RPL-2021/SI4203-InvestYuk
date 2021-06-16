@@ -24,10 +24,15 @@ border-radius: 12px;
 <div class="container">
 <div class="col text-center">
     <div class="card-body"><br>
-      <h5>Sayangnya, Proses pengajuan Anda ditolak, Yuk masih ada kesempatan untuk mencoba kembali</h5>
-    <br><a href="{{ route('ajuStatus.admin.update', $user->id) }}" class="btn btn-success">Kembali ke Menu Utama</a>
-  </div>
-</div>
+        <form method="post" action="{{ route('ajuStatus.admin.update', $user->id) }}">
+        @csrf
+            <h5>Sayangnya, Proses pengajuan Anda ditolak, Yuk masih ada kesempatan untuk mencoba kembali</h5>            
+            <input type="hidden" name="noname" value="null">
+            <button type="submit" class="btn btn-success">
+                Kembali ke Menu Utama
+            </button>
+        </form>
+    </div>
 </div>
 </div>
 <br>

@@ -43,7 +43,7 @@ top: 56px;
 
 <div class="container">
     <div class="card-body1">
-        <form method="post" action="{{ route('ajuStatus.store') }}">
+        <form method="post" action="{{ route('ajuStatus.admin.store') }}">
 						@csrf
             <table class="table text-center">
                 <thead>
@@ -73,7 +73,7 @@ top: 56px;
                 <p class="form-group text-center">Tidak ada pengajuan perubahan status</p>
             @else
                 <div class="form-group text-center">
-                    <button href="#" class="btn btn-success align-middle">Konfirmasi</button>
+                    <button class="btn btn-success align-middle">Konfirmasi</button>
                 </div>
             @endif
         </form>
