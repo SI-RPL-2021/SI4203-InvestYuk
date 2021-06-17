@@ -93,6 +93,11 @@ border-radius: 15px;
 
 <div class="container">
 <br>
+@foreach ($errors->all() as $error)
+
+	<div class="alert alert-danger mb-3">{{ $error }}</div>
+
+@endforeach
 
 <div class="card10">
 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use Illuminate\Http\Request;
+use App\Models\Kelas;
 
 class CourseController extends Controller
 {
@@ -35,7 +36,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('learning.buat-learning');
+        $kelass = Kelas::all();
+        return view('learning.buat-learning')->with('kelass', $kelass);
     }
 
     /**
@@ -46,6 +48,13 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
+        // Check for correct role
+        if(auth()->user()->role != 'Admin'){
+            return redirect('/')->withErrors([
+                'role' => 'The account is not authorized',
+                ]);
+        }
+
         $add_course = new Course;
         $add_course->course_name = $request->get('course_name');
         $add_course->course_desc = $request->get('course_desc');
@@ -102,6 +111,13 @@ class CourseController extends Controller
 
     public function homeCourse()
     {
+        // hapus session variable jika user sempat melakukan kuis sebelumnya
+        Session::forget('numSoal');
+        Session::forget('arrSoal');
+        Session::forget('arrJawaban');
+        Session::forget('cocokJawaban');
+        Session::forget('totBenar');
+        
         return view('learning.learning');
     }
 

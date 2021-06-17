@@ -74,11 +74,41 @@ border-radius: 15px;
                 <div class="container">
                     <form method="post" id="form" action="{{ route('kelas.result.kuis', $kelas->id) }}" enctype='multipart/form-data'>
                     @csrf
+                        @if($kuis->jenis_kuis == 'pilgan')
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="jawaban_kuis" id="jawaban_kuis" value="option1">
+                            <label class="form-check-label" for="jawaban_kuis">
+                                Pilihan A
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="jawaban_kuis" id="jawaban_kuis" value="option2">
+                        <label class="form-check-label" for="jawaban_kuis">
+                            Pilihan B
+                        </label>
+                        </div>
+
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="jawaban_kuis" id="jawaban_kuis" value="option3">
+                        <label class="form-check-label" for="jawaban_kuis">
+                            Pilihan C
+                        </label>
+                        </div>
+
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="jawaban_kuis" id="jawaban_kuis" value="option4">
+                        <label class="form-check-label" for="jawaban_kuis">
+                            Pilihan D
+                        </label>
+                        </div>
+                        @else
                         <input type="hidden" value="id" name="{{$kelas->id}}">
                         <div class="form-group">
                             <h4 for="jawaban_kuis">Jawaban</h4>
                             <textarea class="form-control" id="jawaban_kuis" name="jawaban_kuis" placeholder="Tuliskan jawaban di sini" rows="3"></textarea>
                         </div>
+                        @endif
 
                         <button class="btn btn-primary test" id="jawaban_kuis" 
                         data-id="jawaban_kuis" >

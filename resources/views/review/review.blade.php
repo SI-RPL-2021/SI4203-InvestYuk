@@ -42,9 +42,16 @@
 <br>
 
 <div class="container">
+<br>
+@foreach ($errors->all() as $error)
+
+	<div class="alert alert-danger mb-3">{{ $error }}</div>
+
+@endforeach
+
     <div class="row">
         <div class="col-md-12">
-            <h1 class="text-center">Review Kelas</h1>
+            <h1 class="text-center">Review Learning Path {{ $course['course_name'] }}</h1>
         </div>
     </div>
 

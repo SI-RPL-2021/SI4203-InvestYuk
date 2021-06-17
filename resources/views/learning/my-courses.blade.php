@@ -9,12 +9,17 @@
 <div class="container">
     <div class="row mb-5">
         <div class="col-md-12 text-center">
-            <h1>MY COURSE</h1>
+            <h1>My Learning Path</h1>
         </div>
     </div>
     <div class="row">
-        <a class="btn btn-primary ml-3 mb-4" href="{{ route('courses') }}">Learn New Course</a>
+        <a class="btn btn-primary ml-3 mb-4" href="{{ route('courses') }}">Learn New Learning Path</a>
     </div>
+    @if(auth()->user()->role == 'Admin')
+        <div class="alert alert-info" role="alert">
+            sebaiknya Anda menggunakan akun lain untuk mempelajari learning path
+        </div>
+    @endif
     <div class="row">
         @foreach ($courses as $dc)
         <div class="col-sm-4 mb-4">
@@ -22,7 +27,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{$dc->course_name}}</h5>
                     <p class="card-text"> {{$dc->course_desc}} </p>
-                    <a class="btn btn-info" href="{{ route('contentCourse',$dc->id_course) }}">See Course</a>
+                    <a class="btn btn-info" href="{{ route('contentCourse',$dc->id_course) }}">Details</a>
                     <a class="btn btn-primary" href="{{route('createReview',$dc->id_course)}}">Review</a>
                 </div>
             </div>

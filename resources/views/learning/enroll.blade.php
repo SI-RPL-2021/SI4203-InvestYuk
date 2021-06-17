@@ -8,16 +8,22 @@
 <br>
 <br>
 <div class="container">
+<br>
+@foreach ($errors->all() as $error)
+
+	<div class="alert alert-danger mb-3">{{ $error }}</div>
+
+@endforeach
 
   <form action="{{route('enrollCourse')}}" method="POST">
     @csrf
-    <legend>Nama Coursenya</legend>
+    <legend>Learning Path {{ $data_course['course_name'] }}</legend>
     <p>by InvestYuk!</p>
     <br>
     <label for="">Id Course</label>
-    <input type="text" class="form-control" id="enroll" name="id_course" value="{{$data_course['id']}}">
+    <input type="hidden" class="form-control" id="enroll" name="id_course" value="{{$data_course['id']}}">
     <label for="">Course Name</label>
-    <input type="text" class="form-control" id="enroll" name="course_name" value="{{$data_course['course_name']}}">
+    <input type="hidden" class="form-control" id="enroll" name="course_name" value="{{$data_course['course_name']}}">
     <br>
     <div class="input-group">
       <div class="input-group-text">Enroll</div>

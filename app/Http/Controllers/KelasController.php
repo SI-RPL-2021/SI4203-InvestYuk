@@ -46,13 +46,7 @@ class KelasController extends Controller
      */
     public function show($id)
     {
-        // masukin bagian student seen
-        // kemungkinan besar pake cookies, dicek kalau udah punya, berarti gak usah nambahin
-        // atau buat tabel yg ngehubungin user sama kelas, cuma untuk seen doang
-        // nanti buat tabel yg ngehubungin user sama kelas, buat nyimpen done dan selesai
-        // boros, tapi keknya emng harus gitu
-
-        // hapus session variable jika user sempat melakuka kuis sebelumnya
+        // hapus session variable jika user sempat melakukan kuis sebelumnya
         Session::forget('numSoal');
         Session::forget('arrSoal');
         Session::forget('arrJawaban');
@@ -71,6 +65,12 @@ class KelasController extends Controller
     public function showTopic($id)
     {
         $kelas = Kelas::find($id);
+
+        if($kelas->name_topic == null){
+            return back()->withErrors([
+                'email' => 'This class does not have any topic',
+            ]);
+        }
         return view('kelas/menonton-materi')->with('kelas', $kelas);
     }
 
@@ -82,6 +82,12 @@ class KelasController extends Controller
     public function showVideo($id)
     {
         $kelas = Kelas::find($id);
+
+        if($kelas->name_video == null){
+            return back()->withErrors([
+                'email' => 'This class does not have any video',
+            ]);
+        }
         return view('kelas/menonton-video')->with('kelas', $kelas);
     }
 
@@ -93,6 +99,12 @@ class KelasController extends Controller
     public function showKuis($id)
     {
         $kelas = Kelas::find($id);
+
+        if($kelas->name_kuis == null){
+            return back()->withErrors([
+                'email' => 'This class does not have any kuis',
+            ]);
+        }
         $kuis = Kuis::where("kelas_id", $id)->first();
         
         if(Session::get('numSoal') == null){
@@ -105,11 +117,13 @@ class KelasController extends Controller
             
             $arrKuis = explode('$%^', $fileReaded);
 
+            // dd($arrKuis);
+
             
             if($kuis->jenis_kuis == 'pilgan'){
                 for ($i=0; $i < $kuis->count_kuis; $i++) { 
-                    $arrSoal[$i] = $arrKuis[6*$i + 1];
-                    $arrJawaban[$i] = $arrKuis[6*$i + 6];
+                    $arrSoal[$i] = $arrKuis[7*$i + 1];
+                    $arrJawaban[$i] = $arrKuis[7*$i + 6];
                     // for ($j=$i; $j < 4; $j++) { 
                         //     $arrPilihan[$j] = $arrKuis[$j + 2];
                         // }
@@ -120,6 +134,9 @@ class KelasController extends Controller
                     $arrJawaban[$i] = $arrKuis[3*$i + 2];
                 }
             }
+
+            // dd($arrSoal);
+
             Session::put('arrSoal', $arrSoal);
             Session::put('arrJawaban', $arrJawaban);
             

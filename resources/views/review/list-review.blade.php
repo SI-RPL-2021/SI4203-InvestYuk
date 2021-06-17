@@ -16,21 +16,21 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">Course ID</th>
-                                <th scope="col">Student ID</th>
+                                <th scope="col">Course Name</th>
+                                <th scope="col">Student Name</th>
                                 <th scope="col">Rating </th>
                                 <th scope="col">Review</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($reviews as $review)
+                            @for ($i = 0; $i < count($reviews); $i++)
                             <tr>
-                                <td>{{$review['id_course']}}</td>
-                                <td>{{$review['id_user']}}</td>
-                                <td>{{$review['rating']}}</td>
-                                <td>{{$review['review']}}</td>
+                                <td>{{ $courses->where('id', $reviews[$i]->id_course)->first()->course_name }}</td>
+                                <td>{{ $users->where('id', $reviews[$i]->id_user)->first()->name }}</td>
+                                <td>{{ $reviews[$i]->rating }}</td>
+                                <td>{{ $reviews[$i]->review }}</td>
                             </tr>
-                            @endforeach
+                            @endfor
                         </tbody>
                     </table>
                 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Review;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,8 +17,15 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $data['reviews'] = Review::all();
-        return view('review.list-review')->with($data);
+        $reviews = Review::all();
+        $users = User::all();
+        $courses = Course::all();
+        // review punya id user
+        // dengan id user, cari user dengan id yg sama
+        // munculin namanya
+
+        return view('review.list-review')
+        ->with(['reviews'=>$reviews, 'users'=>$users, 'courses'=>$courses]);
     }
 
     /**
@@ -40,6 +48,17 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
+        $isReviewed = Review::where(
+            ['id_course'=>$request->id_course, 
+            'id_user'=>$request->id_user
+            ])->first();
+        if(isset($isReviewed)){
+
+            return back()->withErrors([
+                'email' => 'You have reviewed this Learning Path.',
+            ]);
+        }
+
         $make_review = new Review;
         $make_review->id_course = $request->id_course;
         $make_review->id_user = $request->id_user;
@@ -57,9 +76,13 @@ class ReviewController extends Controller
      */
     public function show($id_course)
     {
-        $data['reviews'] =  DB::table('reviews')->where('id_course', $id_course)->get();
-        $data['id_course'] = $id_course;
-        return view('review.review-by-id')->with($data);
+        $reviews =  DB::table('reviews')->where('id_course', $id_course)->get();
+        // $data['id_course'] = $id_course;
+        $users = User::all();
+        $course_name = Course::find($id_course)->course_name;
+        
+        return view('review.review-by-id')
+        ->with(['reviews'=>$reviews, 'course_name'=>$course_name, 'users'=>$users]);
     }
 
     /**
